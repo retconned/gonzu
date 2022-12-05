@@ -64,3 +64,13 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+// Main stuff start here
+model Weapon {
+  name        String @unique
+  brand       String
+  image       String
+  type        String
+  attachments Json
+  bullets     String
+}
