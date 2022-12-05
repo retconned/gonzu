@@ -43,4 +43,4 @@ yarn-error.log*
 
 # data
 guns.json
-GONZU_RAW.json
+data/attachments.json
