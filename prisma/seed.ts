@@ -22,9 +22,9 @@ async function processData() {
       element["slot"] = element["type"];
       delete element.type;
     });
-    const proccess = element;
+    const process = element;
     // to write into a file
-    result.push(proccess);
+    result.push(process);
   });
   await writeFile("./data/guns2.json", JSON.stringify(result));
 }
