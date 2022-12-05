@@ -26,7 +26,7 @@ async function processData() {
     // to write into a file
     result.push(process);
   });
-  await writeFile("./data/guns2.json", JSON.stringify(result));
+  await writeFile("./data/guns.json", JSON.stringify(result));
 }
 
 processData();
