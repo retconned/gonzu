@@ -1,7 +1,7 @@
 import { writeFile } from "fs/promises";
 import attachments from "../data/attachments.json";
 import rawData from "../data/GONZU_RAW.json";
-import guns from "../data/guns.json";
+import guns from "../data/guns-experimental.json";
 import { prisma } from "../src/server/db/client";
 
 // first run processData to generate guns.json then un-comment run to seed the gun file into db
@@ -22,33 +22,27 @@ async function processData() {
       // rename attachment type into attachment slot
       element["slot"] = element["type"];
       delete element.type;
+      delete element.slot;
+      delete element.name;
     });
+    element.attachments = [];
     const process = element;
     // to write into a file
     result.push(process);
   });
-  await writeFile("./data/guns.json", JSON.stringify(result));
+  await writeFile("./data/guns-experimental.json", JSON.stringify(result));
 }
 
 processData();
 
 async function seedWeapons() {
-  for (const gun of guns) {
-    await prisma.weapon.create({
-      data: {
-        brand: gun.brand,
-        image: gun.image,
-        name: gun.name,
-        type: gun.type,
-        attachments: {},
-        bullets: gun.bullets,
-      },
-    });
-  }
+  await prisma.weapon.createMany({
+    data: guns,
+  });
   await prisma.$disconnect();
 }
 
-seedWeapons();
+// seedWeapons();
 
 async function processAttachmentData() {
   const attachments: string[] = [];
