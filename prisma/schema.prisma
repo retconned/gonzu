@@ -73,10 +73,13 @@ model Weapon {
   type        String
   attachments Json
   bullets     String
+  Attachments Attachment[]
 }
 
 model Attachment {
   id   Int    @id @default(autoincrement())
   name String
   slot String
+  unlock string
+  weaponParent Weapon @relation(fields:[unlock], references:[name], onDelete: Cascade)
 }
