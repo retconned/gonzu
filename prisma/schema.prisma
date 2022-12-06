@@ -74,12 +74,25 @@ model Weapon {
   attachments Json
   bullets     String
   Attachments Attachment[]
-}
+  Builds Build[] 
+  }
 
 model Attachment {
   id   Int    @id @default(autoincrement())
   name String
   slot String
-  unlock string
+  unlock String
   weaponParent Weapon @relation(fields:[unlock], references:[name], onDelete: Cascade)
+  builds  Int
+  Builds Build @relation(fields: [builds], references: [id], onDelete: Cascade)
 }
+
+model Build {
+    id Int @id @default(autoincrement())
+    name String?
+    weapon String
+    Weapon Weapon @relation(fields: [weapon], references: [name])
+    attachments Attachment[]
+    likes Int
+    visible Boolean
+  }
