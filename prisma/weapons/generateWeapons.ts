@@ -11,7 +11,7 @@ async function generateGuns() {
     delete weapon.attachments;
     result.push(weapon);
   });
-  await writeFile("./data/guns.json", JSON.stringify(result));
+  await writeFile("./data/weapons.json", JSON.stringify(result));
   console.log(`🔫 generated ${result.length} weapons.`);
 }
 
