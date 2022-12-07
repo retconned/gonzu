@@ -67,10 +67,28 @@ model VerificationToken {
 
 // Main stuff start here
 model Weapon {
-  name        String @unique
+  name        String       @id @unique
   brand       String
   image       String
   type        String
-  attachments Json
   bullets     String
+  Attachments Attachment[]
+  Builds      Build[]
+}
+
+model Attachment {
+  id           Int      @id @default(autoincrement())
+  name         String   @unique
+  slot         String
+  WeaponParent Weapon[]
+}
+
+model Build {
+  id          String  @id @default(cuid())
+  name        String?
+  weapon      String
+  Weapon      Weapon  @relation(fields: [weapon], references: [name])
+  attachments Json
+  likes       Int
+  visible     Boolean
 }

@@ -41,6 +41,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-# data
-guns.json
-GONZU_RAW.json
+# data for seeding
+data/weapons.json
+data/attachments.json
