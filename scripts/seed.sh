@@ -5,5 +5,5 @@
 ###################################################
 
 
-tsx prisma/seedWeapons.ts 
-tsx prisma/seedAttachments.ts
+tsx prisma/weapons/seedWeapons.ts 
+tsx prisma/attachments/seedAttachments.ts

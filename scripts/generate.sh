@@ -5,5 +5,5 @@
 ###################################################
 
 
-tsx prisma/generateWeapons.ts 
-tsx prisma/generateAttachments.ts
+tsx prisma/weapons/generateWeapons.ts 
+tsx prisma/attachments/generateAttachments.ts
