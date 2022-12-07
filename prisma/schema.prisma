@@ -83,8 +83,6 @@ model Attachment {
   slot String
   unlock String
   weaponParent Weapon @relation(fields:[unlock], references:[name], onDelete: Cascade)
-  builds  Int
-  Builds Build @relation(fields: [builds], references: [id], onDelete: Cascade)
 }
 
 model Build {
@@ -92,7 +90,7 @@ model Build {
     name String?
     weapon String
     Weapon Weapon @relation(fields: [weapon], references: [name])
-    attachments Attachment[]
+    attachments Json
     likes Int
     visible Boolean
-  }
+}
