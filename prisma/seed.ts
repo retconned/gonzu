@@ -15,17 +15,7 @@ async function processData() {
     delete element.tier;
     delete element.pickRate;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    element.attachments.forEach((element: any) => {
-      // remove unlock data
-      delete element.unlock;
-      // rename attachment type into attachment slot
-      element["slot"] = element["type"];
-      delete element.type;
-      delete element.slot;
-      delete element.name;
-    });
-    element.attachments = [];
+    delete element.attachments;
     const process = element;
     // to write into a file
     result.push(process);
@@ -33,7 +23,7 @@ async function processData() {
   await writeFile("./data/guns-experimental.json", JSON.stringify(result));
 }
 
-processData();
+//processData();
 
 async function seedWeapons() {
   await prisma.weapon.createMany({
@@ -55,13 +45,13 @@ async function processAttachmentData() {
     delete element.pickRate;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    element.attachments.forEach((element: any) => {
+    element.attachments.forEach((attachment: any) => {
       // remove unlock data
-      delete element.unlock;
+      delete attachment.unlock;
       // rename attachment type into attachment slot
-      element["slot"] = element["type"];
-      delete element.type;
-      attachments.push(element);
+      attachment["slot"] = attachment["type"];
+      delete attachment.type;
+      attachments.push({ ...attachment, weaponParent: element.name });
     });
   });
   // filter and only leave unique attachments
@@ -72,16 +62,28 @@ async function processAttachmentData() {
   );
 
   // to write into a file
-  await writeFile("./data/attachments.json", JSON.stringify(uAttachments));
+  await writeFile("./data/attachments.json", JSON.stringify(attachments));
 }
 
-// processAttachmentData();
+//processAttachmentData();
 
 async function seedAttachments() {
-  await prisma.attachment.createMany({
-    data: attachments,
-  });
+  for (let i = 0; i < attachments.length; i++) {
+    await prisma.attachment.upsert({
+      where: {
+        name: attachments[i]!.name,
+      },
+      create: {
+        name: attachments[i]!.name,
+        slot: attachments[i]!.slot,
+        WeaponParent: { connect: { name: attachments[i]!.weaponParent } },
+      },
+      update: {
+        WeaponParent: { connect: { name: attachments[i]!.weaponParent } },
+      },
+    });
+  }
   await prisma.$disconnect();
 }
 
-// seedAttachments();
+seedAttachments();
