@@ -40,3 +40,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# data for seeding
+data/weapons.json
+data/attachments.json
