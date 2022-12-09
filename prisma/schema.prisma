@@ -73,7 +73,7 @@ model Weapon {
   type        String
   bullets     String
   Attachments Attachment[]
-  Builds      Build[]
+  Builds      Loadout[]
 }
 
 model Attachment {
@@ -83,12 +83,13 @@ model Attachment {
   WeaponParent Weapon[]
 }
 
-model Build {
-  id          String  @id @default(cuid())
-  name        String?
-  weapon      String
-  Weapon      Weapon  @relation(fields: [weapon], references: [name])
+model Loadout {
+  id          String   @id @default(cuid())
+  loadoutName String?
+  weaponBody  String   @map("weapon")
+  Weapon      Weapon   @relation(fields: [weaponBody], references: [name])
   attachments Json
-  likes       Int
+  likes       Int?
   visible     Boolean
+  updatedAt   DateTime @default(now())
 }
