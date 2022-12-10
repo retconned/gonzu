@@ -224,7 +224,6 @@ const AttachmentComponent = ({
     // expected result =  [{id:5,horizontalTune:"5",verticalTune:"9"},{id:7,horizontalTune:"3",verticalTune:"1"},{id:10,horizontalTune:"2",verticalTune:"4"}]
     // current result = [{id:5,horizontalTune:"5",verticalTune:"9"}]  ** only enteries a single entry when clicking multiple attachments
     // https://beta.reactjs.org/learn/updating-arrays-in-state will help you fix it
-
     setWeaponBuild((current: any) => {
       return current !== null
         ? {
