@@ -21,8 +21,8 @@ export const loadoutRouter = router({
         attachments: z.array(
           z.object({
             id: z.number(),
-            horizontalTune: z.string(),
-            verticalTune: z.string(),
+            horizontalTune: z.number(),
+            verticalTune: z.number(),
           }),
         ),
       }),
