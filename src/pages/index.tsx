@@ -3,35 +3,17 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
+import TuneModal from "../components/TuneModal";
 
 import { trpc } from "../utils/trpc";
-
-type AttachmentProps = {
-  id: number;
-  name: string;
-  slot: string;
-};
-
-type WeaponBuild = {
-  name: string;
-  attachmentId: number;
-  attachments: Array<AttachmentBuild | undefined>;
-  likes: number;
-  visible: boolean;
-};
-
-type AttachmentBuild = {
-  Id: number;
-  horizontalTune: string;
-  verticalTune: string;
-};
 
 const Home: NextPage = () => {
   const [weapon, setWeapon] = useState("");
   const [weaponBuild, setWeaponBuild] = useState<WeaponBuild | null>(null);
   const [loadoutName, setLoadoutName] = useState<string>("");
-  const [horizontalTune, setHorizontalTune] = useState<string>("");
-  const [verticalTune, setVerticalTune] = useState<string>("");
+  const [selectedAttachment, setSelectedAttachment] = useState<number>(0);
+  const [tuneModalVisibility, setTuneModalVisibility] =
+    useState<boolean>(false);
 
   const { data: getAllWeapons } = trpc.weapons.getAllWeapons.useQuery();
 
@@ -45,7 +27,7 @@ const Home: NextPage = () => {
     finalBuild({
       name: loadoutName,
       weaponBody: weapon,
-      attachments: [{ id: 55, horizontalTune: "33", verticalTune: "33" }],
+      attachments: weaponBuild?.attachments as any,
     });
   };
   useEffect(() => {
@@ -58,6 +40,33 @@ const Home: NextPage = () => {
       });
     }
   }, [getWeaponByName]);
+
+  const handleAttachmentAddition = (
+    verticalTune: number,
+    horizontalTune: number,
+  ) => {
+    setWeaponBuild((current: any) => {
+      return current !== null
+        ? {
+            ...current,
+            attachments: [
+              ...current.attachments,
+              {
+                id: selectedAttachment,
+                horizontalTune: horizontalTune,
+                verticalTune: verticalTune,
+              },
+            ],
+          }
+        : null;
+    });
+    setTuneModalVisibility(false);
+  };
+
+  useEffect(() => {
+    console.log(weaponBuild);
+  }, [weaponBuild]);
+
   return (
     <>
       <Head>
@@ -66,6 +75,12 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
+        {tuneModalVisibility && (
+          <TuneModal
+            setVisibility={setTuneModalVisibility}
+            handleAttachmentAddition={handleAttachmentAddition}
+          />
+        )}
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
@@ -156,10 +171,8 @@ const Home: NextPage = () => {
                           slot={attachment.slot}
                           weaponBuild={weaponBuild}
                           setWeaponBuild={setWeaponBuild}
-                          verticalTune={verticalTune}
-                          horizontalTune={horizontalTune}
-                          setHorizontalTune={setHorizontalTune}
-                          setVerticalTune={setVerticalTune}
+                          setSelectedAttachment={setSelectedAttachment}
+                          setTuneModalVisibility={setTuneModalVisibility}
                         />
                       );
                     },
@@ -175,76 +188,31 @@ const Home: NextPage = () => {
 
 export default Home;
 
-const AuthShowcase: React.FC = () => {
-  const { data: sessionData } = useSession();
-
-  const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined },
-  );
-
-  return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-center text-2xl text-white">
-        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-        {secretMessage && <span> - {secretMessage}</span>}
-      </p>
-      <button
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-        onClick={sessionData ? () => signOut() : () => signIn()}
-      >
-        {sessionData ? "Sign out" : "Sign in"}
-      </button>
-    </div>
-  );
-};
-
 const AttachmentComponent = ({
   id,
   name,
   slot,
   setWeaponBuild,
-  horizontalTune,
-  verticalTune,
-  setHorizontalTune,
-  setVerticalTune,
+  setTuneModalVisibility,
+  setSelectedAttachment,
 }: {
   id: number;
   name: string;
   slot: string;
   weaponBuild: WeaponBuild | null;
   setWeaponBuild: Dispatch<SetStateAction<WeaponBuild | null>>;
-  horizontalTune: string;
-  verticalTune: string;
-  setHorizontalTune: Dispatch<SetStateAction<string>>;
-  setVerticalTune: Dispatch<SetStateAction<string>>;
+  setSelectedAttachment: Dispatch<SetStateAction<number>>;
+  setTuneModalVisibility: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const handleAttachmentClick = () => {
-    //  *TODO this only adds a single id object instead of multiple objects with ids
-    // expected result =  [{id:5,horizontalTune:"5",verticalTune:"9"},{id:7,horizontalTune:"3",verticalTune:"1"},{id:10,horizontalTune:"2",verticalTune:"4"}]
-    // current result = [{id:5,horizontalTune:"5",verticalTune:"9"}]  ** only enteries a single entry when clicking multiple attachments
-    // https://beta.reactjs.org/learn/updating-arrays-in-state will help you fix it
-    setWeaponBuild((current: any) => {
-      return current !== null
-        ? {
-            ...current,
-            attachments: [
-              ...current.attachments,
-              {
-                id: id,
-                horizontalTune: horizontalTune,
-                verticalTune: verticalTune,
-              },
-            ],
-          }
-        : null;
-    });
+  const handleAttachmentSelect = () => {
+    setSelectedAttachment(id);
+    setTuneModalVisibility(true);
   };
 
   return (
     <div className="flex flex-col bg-green-300 p-2">
       <div
-        onClick={() => handleAttachmentClick()}
+        onClick={() => handleAttachmentSelect()}
         className="flex items-center justify-between bg-blue-300"
       >
         <p>{id}</p>
