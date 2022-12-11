@@ -27,7 +27,7 @@ const Home: NextPage = () => {
     finalBuild({
       name: loadoutName,
       weaponBody: weapon,
-      attachments: weaponBuild!.attachments,
+      attachments: weaponBuild?.attachments as any,
     });
   };
   useEffect(() => {
