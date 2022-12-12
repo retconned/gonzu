@@ -3,6 +3,7 @@ import Head from "next/head";
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
 import TuneModal from "../components/TuneModal";
+import type { AttachmentProps, WeaponBuild } from "../types/types";
 
 import { trpc } from "../utils/trpc";
 
