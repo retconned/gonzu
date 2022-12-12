@@ -1,5 +1,4 @@
 import { type NextPage } from "next";
-import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
@@ -21,7 +20,8 @@ const Home: NextPage = () => {
     name: weapon,
   });
 
-  const { mutate: finalBuild } = trpc.loadout.createLoadout.useMutation();
+  const { mutate: finalBuild, isLoading: finalBuildLoading } =
+    trpc.loadout.createLoadout.useMutation();
 
   const handleCreateLoadout = async () => {
     finalBuild({
@@ -85,10 +85,7 @@ const Home: NextPage = () => {
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
           </h1>
-          <div className="flex flex-col items-center gap-2">
-            {/* auth button */}
-            {/* <AuthShowcase /> */}
-          </div>
+          <div className="flex flex-col items-center gap-2"></div>
 
           <form action="" className="flex">
             <input
@@ -98,30 +95,13 @@ const Home: NextPage = () => {
               type="text"
               placeholder="loadout name"
             />
-            {/* WIP , this attachment sepicific instead of a state value */}
-            {/* <div className="flex flex-col items-center justify-center text-black">
-              <input
-                onChange={(e) => {
-                  setHorizontalTune(e.target.value);
-                }}
-                type="text"
-                placeholder="horizontal tune"
-              />
-              <input
-                onChange={(e) => {
-                  setVerticalTune(e.target.value);
-                }}
-                type="text"
-                placeholder="vertical tune"
-              />
-            </div> */}
           </form>
 
           <div>
             <button
               className=" rounded-full bg-blue-500 px-10 py-3  font-bold text-white"
               onClick={handleCreateLoadout}
-              // disabled={mutation.isLoading}
+              disabled={finalBuildLoading}
             >
               createLoadout
             </button>
@@ -131,7 +111,6 @@ const Home: NextPage = () => {
             <div>{weaponBuild?.name}</div>
             <div>{weaponBuild?.likes}</div>
             <div>{weaponBuild?.visible}</div>
-            {/* <div>{weaponBuild?.attachments.}</div> */}
           </div>
           <div className="flex flex-col">
             <p className="mb-4 text-2xl font-bold text-white ">
