@@ -6,6 +6,7 @@ async function generateGuns() {
   const result: string[] = [];
 
   rawData.map(async (weapon: any) => {
+    weapon.name = weapon.name.toUpperCase();
     delete weapon.tier;
     delete weapon.pickRate;
     delete weapon.attachments;

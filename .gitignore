@@ -44,3 +44,6 @@ yarn-error.log*
 # data for seeding
 data/weapons.json
 data/attachments.json
+data/loadouts.json
+data/LOADOUTS_RAW.json
+prisma/loadout/rawFetch.ts
