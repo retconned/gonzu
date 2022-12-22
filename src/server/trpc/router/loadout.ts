@@ -3,13 +3,14 @@ import { z } from "zod";
 import { publicProcedure, router } from "../trpc";
 
 export const loadoutRouter = router({
-  hello: publicProcedure
-    .input(z.object({ text: z.string().nullish() }).nullish())
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input?.text ?? "world"}`,
-      };
-    }),
+  getLoadoutById: publicProcedure.input(z.string()).query(({ input, ctx }) => {
+    console.log(input);
+    return ctx.prisma.loadout.findUnique({
+      where: {
+        id: input,
+      },
+    });
+  }),
   getAllLoadouts: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.loadout.findMany();
   }),
@@ -28,7 +29,6 @@ export const loadoutRouter = router({
       }),
     )
     .mutation(async ({ input, ctx }) => {
-      console.log("input", input);
       return await ctx.prisma.loadout.create({
         data: {
           loadoutName: input.name,
