@@ -46,6 +46,7 @@ module.exports = {
         "security",
         "changeset",
         "typo",
+        "temp",
       ],
     ],
   },
