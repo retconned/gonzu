@@ -1,51 +1,51 @@
 import { type NextPage } from "next";
-import { useEffect } from "react";
-import { trpc } from "../utils/trpc";
+// import { useEffect } from "react";
+// import { trpc } from "../utils/trpc";
 // import { useEffect, useState } from "react";
 // import { trpc } from "../utils/trpc";
 
 const Profile: NextPage = () => {
-  const profile = "str3";
+  // const profile = "str3";
 
-  const { data: profileData } = trpc.profile.getUnqiueProfile.useQuery(profile);
-  // console.log(profileData);
+  // const { data: profileData } = trpc.profile.getUnqiueProfile.useQuery(profile);
+  // // console.log(profileData);
 
-  const getLoadoutId = profileData?.loadouts?.toString();
+  // const getLoadoutId = profileData?.loadouts?.toString();
 
-  console.log(getLoadoutId);
+  // console.log(getLoadoutId);
 
-  const { data: loadoutData } = trpc.loadout.getLoadoutById.useQuery(
-    getLoadoutId as string,
-  );
+  // const { data: loadoutData } = trpc.loadout.getLoadoutById.useQuery(
+  //   getLoadoutId as string,
+  // );
 
-  const attachmentIds: any = [];
+  // const attachmentIds: any = [];
 
-  const attachments: any = loadoutData?.attachments;
+  // const attachments: any = loadoutData?.attachments;
 
-  const attachmentArray = attachments.map((attachment: any) => {
-    attachmentIds.push(attachment.id);
-  });
-
-  const getAttachments = trpc.weapons.getAttachments.useQuery(attachmentIds, {
-    enabled: false,
-  });
-
-  useEffect(() => {
-    if (attachmentIds.length >= 1) {
-      getAttachments.refetch();
-    }
-  }, [attachmentIds]);
-
-  // const { data: attachData } = trpc.weapons.getAttachmentById.useQuery({
-  //   id: loadout?.attachments[0].id,
+  // const attachmentArray = attachments.map((attachment: any) => {
+  //   attachmentIds.push(attachment.id);
   // });
 
-  const attachmentNames = getAttachments.data?.map((attachment: any) => {
-    console.log(attachment.name);
-  });
+  // const getAttachments = trpc.weapons.getAttachments.useQuery(attachmentIds, {
+  //   enabled: false,
+  // });
 
-  const loadoutName = loadoutData?.loadoutName;
-  const weaponName = loadoutData?.weaponBody;
+  // useEffect(() => {
+  //   if (attachmentIds.length >= 1) {
+  //     getAttachments.refetch();
+  //   }
+  // }, [attachmentIds]);
+
+  // // const { data: attachData } = trpc.weapons.getAttachmentById.useQuery({
+  // //   id: loadout?.attachments[0].id,
+  // // });
+
+  // const attachmentNames = getAttachments.data?.map((attachment: any) => {
+  //   console.log(attachment.name);
+  // });
+
+  // const loadoutName = loadoutData?.loadoutName;
+  // const weaponName = loadoutData?.weaponBody;
 
   // /////////////////////////////////////////////////////
 
