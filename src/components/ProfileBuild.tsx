@@ -17,55 +17,57 @@ const LoadoutBuilder = () => {
           </h1>
           <div className="flex flex-col items-center gap-2"></div>
 
-          <div>
+          <div className="">
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-col gap-3"
+              className=" flex flex-col gap-3 text-neutral-400"
             >
               <input
-                className="rounded-md bg-neutral-800 p-1 text-center placeholder:text-center"
+                className="form-input rounded-md bg-neutral-800 p-1 text-center placeholder-neutral-400 placeholder:text-center"
                 type="text"
                 placeholder="username"
                 {...register("username", {})}
               />
               <input
-                className="rounded-md bg-neutral-800 p-1 text-center placeholder:text-center"
+                className="form-input rounded-md bg-neutral-800 p-1 text-center placeholder-neutral-400 placeholder:text-center"
                 type="text"
                 placeholder="twitch"
                 {...register("twitch", {})}
               />
               <input
-                className="rounded-md bg-neutral-800 p-1 text-center placeholder:text-center"
+                className="form-input rounded-md bg-neutral-800 p-1 text-center placeholder-neutral-400 placeholder:text-center"
                 type="text"
                 placeholder="twitter"
                 {...register("twitter", {})}
               />
               <input
-                className="rounded-md bg-neutral-800 p-1 text-center placeholder:text-center"
+                className="rounded-md bg-neutral-800 p-1 text-center placeholder-neutral-400 placeholder:text-center"
                 type="text"
                 placeholder="youtube"
                 {...register("youtube", {})}
               />
               <input
-                className="rounded-md bg-neutral-800 p-1 text-center placeholder:text-center"
+                className="form-input rounded-md bg-neutral-800 p-1 text-center placeholder-neutral-400 placeholder:text-center"
                 type="text"
                 placeholder="tiktok"
                 {...register("tiktok", {})}
               />
               <select
-                className="rounded-md bg-neutral-800 p-1 text-center placeholder:text-center"
+                className="form-select rounded-md bg-neutral-800 p-1 text-center placeholder:text-center"
                 {...register("is_streamer", {
                   setValueAs: (v) => Boolean(v),
                 })}
               >
-                <option value={"true"}>true</option>
+                <option className="" value={"true"}>
+                  true
+                </option>
                 <option value={""}>false</option>
               </select>
               <input
                 type="text"
                 placeholder="language"
                 {...register("language", {})}
-                className="rounded-md bg-neutral-800 p-1 text-center placeholder:text-center"
+                className="form-input rounded-md bg-neutral-800 p-1 text-center placeholder-neutral-400 placeholder:text-center"
               />
 
               <input

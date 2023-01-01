@@ -81,7 +81,7 @@ const LoadoutBuilder = () => {
           <div className="flex flex-col items-center gap-2"></div>
 
           <input
-            className="rounded-md bg-neutral-800 p-1 text-center placeholder:text-center"
+            className="form-input rounded-md bg-neutral-800 p-1 text-center placeholder-neutral-400 placeholder:text-center"
             onChange={(e) => {
               setLoadoutName(e.target.value);
             }}
@@ -203,9 +203,9 @@ const AttachmentComponent = ({
   return (
     <button
       onClick={() => handleAttachmentSelect()}
-      className=" rounded-md bg-neutral-800 p-2 text-center duration-150 hover:bg-neutral-700"
+      className=" rounded-md bg-neutral-800 px-2 py-1 text-center duration-150 hover:bg-neutral-700"
     >
-      <p className="underline underline-offset-2">{slot}</p>
+      <p className="text-neutral-400 ">{slot}</p>
       <p>{name}</p>
     </button>
   );
