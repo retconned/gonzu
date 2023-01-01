@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <>
       <div className="h-0.5 w-full bg-neutral-600" />
-      <div className="flex w-screen flex-col items-center justify-center bg-neutral-800 py-3 px-10">
+      <div className="flex w-full flex-col items-center justify-center bg-neutral-800 py-3 px-10">
         <div className="flex flex-col items-center justify-center gap-2">
           <p className="font-medium text-neutral-400">Follow GONZU on</p>
           <div className="flex flex-row items-center justify-center space-x-4">

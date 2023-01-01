@@ -38,7 +38,7 @@ const SmallerLoadout = ({
           </p>
         </div>
         <Link href={`${loadoutLink}`}>
-          <button className="w-full rounded-md border border-lime-400 px-2 py-1 text-center text-lime-400">
+          <button className="w-full rounded-md border border-lime-400 px-2 py-1 text-center text-lime-400 duration-150 hover:bg-lime-400 hover:text-neutral-800">
             View build {">"}
           </button>
         </Link>
