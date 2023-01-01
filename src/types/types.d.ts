@@ -77,3 +77,14 @@ type attachmentProps = Omit<LoadoutAttachments, "id">;
 interface LoadoutAttachments extends Attachment {
   name: string;
 }
+
+type ProfileInput = {
+  username: string;
+  twitch?: string;
+  twitter?: string;
+  youtube?: string;
+  tiktok?: string;
+  instagram?: string;
+  is_streamer: boolean;
+  language?: string;
+};

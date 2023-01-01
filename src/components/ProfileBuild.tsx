@@ -1,21 +1,12 @@
-import { useState } from "react";
-
+import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
+import type { ProfileInput } from "../types/types";
 import { trpc } from "../utils/trpc";
 const LoadoutBuilder = () => {
-  const [username, setUsername] = useState<string>("");
-  const [data, setData] = useState<any>();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data: any) => {
+  const { register, handleSubmit } = useForm<ProfileInput>();
+  const onSubmit: SubmitHandler<ProfileInput> = (data) => {
     profileCreate(data);
   };
-  // console.log(errors);
-
   const { mutate: profileCreate } = trpc.profile.createProfile.useMutation();
   return (
     <>
