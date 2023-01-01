@@ -13,7 +13,7 @@ type WeaponBuild = {
 };
 
 type AttachmentBuild = {
-  Id: number;
+  id: number;
   horizontalTune: string;
   verticalTune: string;
 };
@@ -25,13 +25,6 @@ interface Result {
   author: string;
   attachments: Attachment[];
   weaponBody: string;
-}
-
-interface Attachment {
-  slot: Slot;
-  verticalTune: null | string;
-  horizontalTune: null | string;
-  id: number | string;
 }
 
 export enum Slot {
@@ -69,4 +62,17 @@ export enum Type {
   Shotgun = "SHOTGUN",
   Smg = "SMG",
   Sniper = "SNIPER",
+}
+
+interface Attachment {
+  slot: Slot;
+  verticalTune: number | undefined;
+  horizontalTune: number | undefined;
+  id: number | string;
+}
+
+type attachmentProps = Omit<LoadoutAttachments, "id">;
+
+interface LoadoutAttachments extends Attachment {
+  name: string;
 }
