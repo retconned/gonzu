@@ -13,9 +13,10 @@ type WeaponBuild = {
 };
 
 type AttachmentBuild = {
+  name: string;
   id: number;
-  horizontalTune: string;
-  verticalTune: string;
+  horizontalTune: number;
+  verticalTune: number;
 };
 
 interface Result {
