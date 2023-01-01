@@ -62,7 +62,7 @@ const LoadoutBuilder = () => {
   };
 
   useEffect(() => {
-    console.log("byul", weaponBuild);
+    // console.log(weaponBuild);
   }, [weaponBuild]);
 
   return (
