@@ -2,10 +2,11 @@ import { type NextPage } from "next";
 import { useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import ProfileBar from "../../components/ProfileBar";
-import SmallerLoadout from "../../components/SmallerLoadout";
 import { trpc } from "../../utils/trpc";
 
 import { useRouter } from "next/router";
+import NavBar from "../../components/NavBar";
+import SmallerLoadout from "../../components/SmallerLoadout";
 
 const Profile: NextPage = () => {
   const router = useRouter();
@@ -30,7 +31,8 @@ const Profile: NextPage = () => {
   const profileLoadoutsData = getProfileLoadouts.data;
 
   return (
-    <div className="flex h-full w-screen flex-col items-center justify-between bg-neutral-900">
+    <div className="flex h-full flex-col items-center justify-between bg-neutral-900">
+      <NavBar />
       {profileData ? (
         <ProfileBar
           imageSrc="/symfuhny.jpg"
@@ -45,23 +47,25 @@ const Profile: NextPage = () => {
       ) : (
         <p>loading</p>
       )}
-      <div className="grid w-8/12 grid-cols-3 gap-8 ">
-        {profileLoadoutsData ? (
-          profileLoadoutsData.map((loadout) => {
-            return (
-              <SmallerLoadout
-                key={loadout.id}
-                loadoutLink={`${profile}/${loadout.id}`}
-                imageSrc={loadout.Weapon.image}
-                loadoutName={loadout.loadoutName}
-                weaponType={loadout.Weapon.type}
-                weaponBody={loadout.weaponBody}
-              />
-            );
-          })
-        ) : (
-          <p>loading</p>
-        )}
+      <div className="flex w-8/12 items-center justify-center">
+        <div className="grid grid-cols-4 gap-6">
+          {profileLoadoutsData ? (
+            profileLoadoutsData.map((loadout) => {
+              return (
+                <SmallerLoadout
+                  key={loadout.id}
+                  loadoutLink={`${profile}/${loadout.id}`}
+                  imageSrc={loadout.Weapon.image}
+                  loadoutName={loadout.loadoutName}
+                  weaponType={loadout.Weapon.type}
+                  weaponBody={loadout.weaponBody}
+                />
+              );
+            })
+          ) : (
+            <p>loading</p>
+          )}
+        </div>
       </div>
 
       <Footer />
