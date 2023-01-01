@@ -62,12 +62,12 @@ const LoadoutBuilder = () => {
   };
 
   useEffect(() => {
-    console.log(weaponBuild);
+    // console.log(weaponBuild);
   }, [weaponBuild]);
 
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
+      <main className="flex min-h-screen flex-col items-center justify-center">
         {tuneModalVisibility && (
           <TuneModal
             setVisibility={setTuneModalVisibility}
@@ -80,58 +80,71 @@ const LoadoutBuilder = () => {
           </h1>
           <div className="flex flex-col items-center gap-2"></div>
 
-          <form action="" className="flex">
-            <input
-              onChange={(e) => {
-                setLoadoutName(e.target.value);
-              }}
-              type="text"
-              placeholder="loadout name"
-            />
-          </form>
+          <input
+            className="rounded-md bg-neutral-800 p-1 text-center placeholder:text-center"
+            onChange={(e) => {
+              setLoadoutName(e.target.value);
+            }}
+            type="text"
+            placeholder="loadout name"
+          />
 
-          <div>
-            <button
-              className=" rounded-full bg-blue-500 px-10 py-3  font-bold text-white"
-              onClick={handleCreateLoadout}
-              disabled={finalBuildLoading}
-            >
-              createLoadout
-            </button>
-          </div>
+          <button
+            className="rounded-md  bg-blue-500 p-2 font-bold text-white duration-150 hover:bg-blue-700"
+            onClick={handleCreateLoadout}
+            disabled={finalBuildLoading}
+          >
+            Create Loadout
+          </button>
 
-          <div className="text-semibold bg-black text-white">
-            <div>{weaponBuild?.name}</div>
-            <div>{weaponBuild?.likes}</div>
-            <div>{weaponBuild?.visible}</div>
+          <div className="flex flex-col gap-2 rounded-md bg-neutral-800 p-2 text-center text-white">
+            <p>Build preview!</p>
+            <p>
+              Body: <span className="font-bold">{weaponBuild?.name}</span>
+            </p>
+
+            <div className="flex  flex-col gap-2">
+              {weaponBuild?.attachments.map((attachment, i) => {
+                return (
+                  <div
+                    className="flex flex-row gap-2 bg-neutral-700/30 px-4"
+                    key={i}
+                  >
+                    <p>id: {attachment?.id}</p>
+                    <p>hor: {attachment?.verticalTune}</p>
+                    <p>vert: {attachment?.horizontalTune}</p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <div className="flex flex-col">
-            <p className="mb-4 text-2xl font-bold text-white ">
+            <p className="mb-4 text-center text-2xl font-bold text-white">
               select your weapon:
             </p>
-            <div className="flex flex-col space-y-4 text-2xl text-white">
+            <div className="grid grid-cols-6 gap-4 text-xl text-white ">
               {getAllWeapons
                 ? getAllWeapons?.map((weapon: any) => {
                     return (
-                      <div
+                      <button
                         onClick={() => {
                           setWeapon(weapon.name);
                         }}
-                        className="bg-slate-700 px-4"
+                        className="h-8 rounded-md bg-neutral-800 px-4 text-center duration-150 hover:bg-neutral-700"
                         key={weapon.name}
                       >
                         <p>{weapon.name}</p>
-                      </div>
+                      </button>
                     );
                   })
                 : "Loading weapon..."}
             </div>
           </div>
           <div className="flex flex-col items-center">
-            <p className="mb-4 text-2xl font-bold text-white ">
+            <p className="mb-4 text-2xl font-bold text-white">
               select your atatchments:
             </p>
-            <div className="text-2xl text-white">
+            <div className="grid grid-cols-5 gap-4 text-xl text-white">
               {getWeaponByName
                 ? getWeaponByName[0]?.Attachments.map(
                     (attachment: AttachmentProps) => {
@@ -182,17 +195,12 @@ const AttachmentComponent = ({
   };
 
   return (
-    <div className="flex flex-col bg-green-300 p-2">
-      <div
-        onClick={() => handleAttachmentSelect()}
-        className="flex items-center justify-between bg-blue-300"
-      >
-        <p>{id}</p>
-        <div className="bg-red-500">
-          <p>{slot}</p>
-          <p>{name}</p>
-        </div>
-      </div>
-    </div>
+    <button
+      onClick={() => handleAttachmentSelect()}
+      className=" rounded-md bg-neutral-800 p-2 text-center duration-150 hover:bg-neutral-700"
+    >
+      <p className="underline underline-offset-2">{slot}</p>
+      <p>{name}</p>
+    </button>
   );
 };
