@@ -1,29 +1,25 @@
 import Image from "next/image";
+import type { LoadoutAttachments, Slot, attachmentProps } from "../types/types";
 
-interface attachments {
-  slot: string;
-  attachmentName: string;
-  horizontalTune: number;
-  verticalTune: number;
-}
 const LoadoutModal = ({
   loadoutName,
   lastUpdated,
   imageSrc,
   attachments,
 }: {
-  loadoutName: string;
-  lastUpdated: string;
+  loadoutName: string | null;
+  lastUpdated?: Date;
   imageSrc: string;
-  attachments?: attachments[];
+  attachments: LoadoutAttachments[];
 }) => {
   return (
     <>
-      <div className="flex flex-col items-center justify-center rounded-md bg-neutral-800 p-4">
+      <div className="flex max-w-fit flex-col items-center justify-center rounded-md bg-neutral-800 p-4">
         <div className="flex flex-col items-center justify-center pt-4">
           <p className="text-sm text-white">{loadoutName}</p>
           <p className=" text-left text-sm text-neutral-400">
-            Last updated: <span className="text-white">{lastUpdated}</span>
+            Last updated:{" "}
+            <span className="text-white">{lastUpdated?.toDateString()}</span>
           </p>
         </div>
         <Image
@@ -34,40 +30,44 @@ const LoadoutModal = ({
           className="h-[146.25px] w-[292.5px] select-none md:h-[195px] md:w-[390px]"
           priority={true}
         />
-        <div className="container m-auto flex flex-col items-center gap-4 md:grid md:grid-cols-2 md:flex-row md:flex-wrap-reverse md:justify-around md:gap-4 ">
-          <div className="col-span-2 flex items-center justify-center">
+        {attachments ? (
+          <div className="container m-auto flex flex-col items-center gap-4 md:grid md:grid-cols-2 md:flex-row md:flex-wrap-reverse md:justify-around md:gap-4 ">
+            <div className="col-span-2 flex items-center justify-center">
+              <AttachmentComponent
+                slot={attachments[1]?.slot as Slot}
+                name={attachments[1]?.name as string}
+                horizontalTune={attachments[1]?.horizontalTune}
+                verticalTune={attachments[1]?.verticalTune}
+              />
+            </div>
             <AttachmentComponent
-              slot="Optic"
-              attachmentName="Aim OP-V4"
-              horizontalTune={0.1}
-              verticalTune={0.1}
+              slot={attachments[0]?.slot as Slot}
+              name={attachments[0]?.name as string}
+              horizontalTune={attachments[0]?.horizontalTune}
+              verticalTune={attachments[0]?.verticalTune}
+            />
+            <AttachmentComponent
+              slot={attachments[2]?.slot as Slot}
+              name={attachments[2]?.name as string}
+              horizontalTune={attachments[2]?.horizontalTune}
+              verticalTune={attachments[2]?.verticalTune}
+            />
+            <AttachmentComponent
+              slot={attachments[3]?.slot as Slot}
+              name={attachments[3]?.name as string}
+              horizontalTune={attachments[3]?.horizontalTune}
+              verticalTune={attachments[3]?.verticalTune}
+            />
+            <AttachmentComponent
+              slot={attachments[4]?.slot as Slot}
+              name={attachments[4]?.name as string}
+              horizontalTune={attachments[4]?.horizontalTune}
+              verticalTune={attachments[4]?.verticalTune}
             />
           </div>
-          <AttachmentComponent
-            slot="Muzzle"
-            attachmentName="Harbinger D21"
-            horizontalTune={0.1}
-            verticalTune={0.1}
-          />
-          <AttachmentComponent
-            slot="Muzzle"
-            attachmentName="Harbinger D23"
-            horizontalTune={0.1}
-            verticalTune={0.1}
-          />
-          <AttachmentComponent
-            slot="Muzzle"
-            attachmentName="Harbinger D24"
-            horizontalTune={0.1}
-            verticalTune={0.1}
-          />
-          <AttachmentComponent
-            slot="Muzzle"
-            attachmentName="Harbinger D21"
-            horizontalTune={0.1}
-            verticalTune={0.1}
-          />
-        </div>
+        ) : (
+          <p>loading</p>
+        )}
       </div>
     </>
   );
@@ -76,30 +76,36 @@ const LoadoutModal = ({
 export default LoadoutModal;
 
 const AttachmentComponent = ({
-  attachmentName,
+  name,
   slot,
   verticalTune,
   horizontalTune,
-}: attachments) => {
+}: attachmentProps) => {
   return (
     <div className="">
       <div className="flex h-24 w-72 flex-col items-stretch justify-center space-y-1 rounded-md border border-neutral-700 p-4">
         <div className="flex justify-between">
           <p className="text-left text-sm text-neutral-400 ">{slot}</p>
-          <p className="truncate text-left text-sm text-white">
-            {attachmentName}
-          </p>
+          <p className="truncate text-left text-sm text-white">{name}</p>
         </div>
         <div className="flex justify-between">
           <p className="text-left text-sm text-neutral-400 ">Vertical Tune</p>
           <p className="truncate text-left text-sm text-white">
-            {verticalTune}
+            {verticalTune != null ? (
+              verticalTune
+            ) : (
+              <span className="text-neutral-400">No tunning</span>
+            )}
           </p>
         </div>
         <div className="flex justify-between">
           <p className="text-left text-sm text-neutral-400 ">Horizontal Tune</p>
           <p className="truncate text-left text-sm text-white">
-            {horizontalTune}
+            {horizontalTune != null ? (
+              horizontalTune
+            ) : (
+              <span className="text-neutral-400">No tunning</span>
+            )}
           </p>
         </div>
       </div>
