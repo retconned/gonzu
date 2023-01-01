@@ -20,7 +20,7 @@ const LoadoutBuilder = () => {
           <div className="">
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className=" flex flex-col gap-3 text-neutral-400"
+              className=" flex flex-col gap-3 text-white"
             >
               <input
                 className="form-input rounded-md bg-neutral-800 p-1 text-center placeholder-neutral-400 placeholder:text-center"
