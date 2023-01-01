@@ -1,19 +1,22 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const SmallerLoadout = ({
   loadoutName,
+  loadoutLink,
   weaponBody,
   weaponType,
   imageSrc,
 }: {
-  loadoutName: string;
+  loadoutName: string | null;
+  loadoutLink: string;
   weaponBody: string;
   weaponType: string;
   imageSrc: string;
 }) => {
   return (
     <>
-      <div className="flex flex-col items-center justify-center space-y-2 rounded-md border border-neutral-700 bg-neutral-800 p-4">
+      <div className="flex max-w-sm flex-col items-center justify-center space-y-2 rounded-md border border-neutral-700 bg-neutral-800 p-4">
         <Image
           src={imageSrc}
           alt="weapon's picture"
@@ -34,9 +37,11 @@ const SmallerLoadout = ({
             {weaponType}
           </p>
         </div>
-        <button className="w-full rounded-md border border-lime-400 px-2 py-1 text-center text-lime-400">
-          View build {">"}
-        </button>
+        <Link href={`${loadoutLink}`}>
+          <button className="w-full rounded-md border border-lime-400 px-2 py-1 text-center text-lime-400">
+            View build {">"}
+          </button>
+        </Link>
       </div>
     </>
   );
