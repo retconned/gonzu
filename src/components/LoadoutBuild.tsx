@@ -15,9 +15,8 @@ const LoadoutBuilder = () => {
 
   const { data: getAllWeapons } = trpc.weapons.getAllWeapons.useQuery();
 
-  const { data: getWeaponByName } = trpc.weapons.getWeaponByName.useQuery({
-    name: weapon,
-  });
+  const { data: getWeaponByName } =
+    trpc.weapons.getWeaponByName.useQuery(weapon);
 
   const { mutate: finalBuild, isLoading: finalBuildLoading } =
     trpc.loadout.createLoadout.useMutation();

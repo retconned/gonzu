@@ -3,26 +3,22 @@ import { z } from "zod";
 import { publicProcedure, router } from "../trpc";
 
 export const weaponRouter = router({
-  getWeaponByName: publicProcedure
-    .input(z.object({ name: z.string() }))
-    .query(({ input, ctx }) => {
-      // console.log(input);
-      return ctx.prisma.weapon.findMany({
-        where: {
-          name: input?.name,
-        },
-        include: {
-          Attachments: true,
-        },
-      });
-    }),
+  getWeaponByName: publicProcedure.input(z.string()).query(({ input, ctx }) => {
+    return ctx.prisma.weapon.findMany({
+      where: {
+        name: input,
+      },
+      include: {
+        Attachments: true,
+      },
+    });
+  }),
   getAttachmentById: publicProcedure
-    .input(z.object({ id: z.number() }))
+    .input(z.number())
     .query(({ input, ctx }) => {
-      // console.log(input);
       return ctx.prisma.attachment.findUnique({
         where: {
-          id: input?.id,
+          id: input,
         },
       });
     }),
