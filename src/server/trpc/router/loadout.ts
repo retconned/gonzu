@@ -4,13 +4,67 @@ import { publicProcedure, router } from "../trpc";
 
 export const loadoutRouter = router({
   getLoadoutById: publicProcedure.input(z.string()).query(({ input, ctx }) => {
-    console.log(input);
     return ctx.prisma.loadout.findUnique({
       where: {
         id: input,
       },
+      include: {
+        Weapon: {
+          include: {
+            Attachments: {
+              select: {
+                name: true,
+                id: true,
+              },
+            },
+          },
+        },
+      },
     });
   }),
+  getProfileLoadout: publicProcedure
+    .input(z.array(z.string()))
+    .query(({ input, ctx }) => {
+      return ctx.prisma.loadout.findMany({
+        where: {
+          id: {
+            in: input,
+          },
+        },
+        include: {
+          Weapon: {
+            include: {
+              Attachments: {
+                select: {
+                  name: true,
+                  id: true,
+                },
+              },
+            },
+          },
+        },
+      });
+    }),
+  // getProfileLoadoutOld: publicProcedure
+  //   .input(z.array(z.string()))
+  //   .query(({ input, ctx }) => {
+  //     console.log(input);
+  //     return ctx.prisma.loadout.findMany({
+  //       where: {
+  //         id: {
+  //           in: input,
+  //         },
+  //       },
+  //       include: {
+  //         Weapon: {
+  //           select: {
+  //             type: true,
+  //             image: true,
+  //           },
+  //         },
+  //       },
+  //     });
+  //   }),
   getAllLoadouts: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.loadout.findMany();
   }),
