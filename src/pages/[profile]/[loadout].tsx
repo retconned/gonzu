@@ -44,7 +44,7 @@ const Loadout: NextPage = () => {
   return (
     <div className="flex flex-col items-center justify-center bg-black text-white">
       <LoadoutModal
-        imageSrc="/m4.png"
+        imageSrc={getLoadout.data?.Weapon.image as string}
         loadoutName={getLoadout.data?.loadoutName as string}
         lastUpdated={getLoadout.data?.updatedAt}
         attachments={
@@ -52,14 +52,14 @@ const Loadout: NextPage = () => {
         }
       />
       <CategoryTitle emoji="🔥" title={`Other builds by ${profile}`} />
-      <div className="flex flex-row gap-2">
+      <div className="grid grid-cols-3 gap-2">
         {profileLoadoutsData ? (
-          profileLoadoutsData.map((loadout) => {
+          profileLoadoutsData.slice(0, 6).map((loadout) => {
             return (
               <SmallerLoadout
                 key={loadout.id}
                 loadoutLink={`/${profile}/${loadout.id}`}
-                imageSrc="/m4.png"
+                imageSrc={loadout.Weapon.image as string}
                 loadoutName={loadout.loadoutName}
                 weaponType={loadout.Weapon.type}
                 weaponBody={loadout.weaponBody}
