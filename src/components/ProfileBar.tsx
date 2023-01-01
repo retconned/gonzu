@@ -10,11 +10,11 @@ import {
 interface profileBarProps {
   username: string;
   imageSrc: string;
-  instagram?: string;
-  twitter?: string;
-  twitch?: string;
-  tiktok?: string;
-  youtube?: string;
+  instagram?: string | null;
+  twitter?: string | null;
+  twitch?: string | null;
+  tiktok?: string | null;
+  youtube?: string | null;
 }
 
 const ProfileBar = ({
@@ -39,31 +39,31 @@ const ProfileBar = ({
         <p className="pb-1 text-lg font-medium">{username}</p>
       </div>
       <div className="flex flex-row items-center justify-center space-x-4">
-        <a href={twitch}>
+        <a href={twitch != null ? twitch : ""}>
           <FaTwitch
             size={22}
             className="fill-lime-400 duration-100 hover:fill-lime-600"
           />
         </a>
-        <a href={twitter}>
+        <a href={twitter != null ? twitter : ""}>
           <FaTwitter
             size={22}
             className="fill-lime-400 duration-100 hover:fill-lime-600"
           />
         </a>
-        <a href={youtube}>
+        <a href={youtube != null ? youtube : ""}>
           <FaYoutube
             size={22}
             className="fill-lime-400 duration-100 hover:fill-lime-600"
           />
         </a>
-        <a href={tiktok}>
+        <a href={tiktok != null ? tiktok : ""}>
           <FaTiktok
             size={22}
             className="fill-lime-400 duration-100 hover:fill-lime-600"
           />
         </a>
-        <a href={instagram}>
+        <a href={instagram != null ? instagram : ""}>
           <FaInstagram
             size={22}
             className="fill-lime-400 duration-100 hover:fill-lime-600"
