@@ -1,24 +1,22 @@
 import { useState } from "react";
 
+import { useForm } from "react-hook-form";
 import { trpc } from "../utils/trpc";
-
 const LoadoutBuilder = () => {
-  //   const [username, setWeapon] = useState("");
-  //   const [weaponBuild, setWeaponBuild] = useState<WeaponBuild | null>(null);
   const [username, setUsername] = useState<string>("");
-  const { data: getAllProfiles } = trpc.profile.getAllProfiles.useQuery();
+  const [data, setData] = useState<any>();
 
-  const { mutate: profileCreate, isLoading: profileCreateLoading } =
-    trpc.profile.createProfile.useMutation();
-
-  const handleCreateLoadout = async () => {
-    profileCreate({
-      username: username,
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data: any) => {
+    profileCreate(data);
   };
+  // console.log(errors);
 
-  console.log(getAllProfiles);
-
+  const { mutate: profileCreate } = trpc.profile.createProfile.useMutation();
   return (
     <>
       <main className="flex min-h-screen flex-col items-start justify-start bg-gradient-to-b from-[#02246d] to-[#15162c]">
@@ -28,24 +26,49 @@ const LoadoutBuilder = () => {
           </h1>
           <div className="flex flex-col items-center gap-2"></div>
 
-          <form action="" className="flex">
-            <input
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
-              type="text"
-              placeholder="streamer name"
-            />
-          </form>
-
           <div>
-            <button
-              className=" rounded-full bg-blue-500 px-10 py-3  font-bold text-white"
-              onClick={handleCreateLoadout}
-              disabled={profileCreateLoading}
-            >
-              create profile
-            </button>
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+              <input
+                type="text"
+                placeholder="username"
+                {...register("username", {})}
+              />
+              <input
+                type="text"
+                placeholder="twitch"
+                {...register("twitch", {})}
+              />
+              <input
+                type="text"
+                placeholder="twitter"
+                {...register("twitter", {})}
+              />
+              <input
+                type="text"
+                placeholder="youtube"
+                {...register("youtube", {})}
+              />
+              <input
+                type="text"
+                placeholder="tiktok"
+                {...register("tiktok", {})}
+              />
+              <select
+                {...register("is_streamer", {
+                  setValueAs: (v) => Boolean(v),
+                })}
+              >
+                <option value={"true"}>true</option>
+                <option value={""}>false</option>
+              </select>
+              <input
+                type="text"
+                placeholder="language"
+                {...register("language", {})}
+              />
+
+              <input type="submit" className="rounded-md bg-red-500 p-2" />
+            </form>
           </div>
         </div>
       </main>

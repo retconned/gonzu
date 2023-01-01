@@ -25,19 +25,21 @@ export const profileRouter = router({
         youtube: z.string().optional(),
         tiktok: z.string().optional(),
         instagram: z.string().optional(),
+        is_streamer: z.boolean(),
         language: z.string().optional(),
       }),
     )
     .mutation(async ({ input, ctx }) => {
       return await ctx.prisma.profile.create({
         data: {
-          username: input.username,
+          username: input.username.toLowerCase(),
           loadouts: [],
           twitch: input.twitch,
           twitter: input.twitter,
           youtube: input.youtube,
           tiktok: input.tiktok,
           instagram: input.instagram,
+          is_streamer: input.is_streamer,
           language: input.language,
         },
       });
