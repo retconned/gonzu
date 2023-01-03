@@ -4,13 +4,13 @@ type AttachmentProps = {
   slot: string;
 };
 
-type WeaponBuild = {
-  name: string;
-  attachmentId: number;
-  attachments: Array<AttachmentBuild | undefined>;
-  likes: number;
-  visible: boolean;
-};
+// type WeaponBuild = {
+//   name: string;
+//   attachmentId: number;
+//   attachments: Array<AttachmentBuild | undefined>;
+//   likes: number;
+//   visible: boolean;
+// };
 
 type AttachmentBuild = {
   name: string;
@@ -73,10 +73,19 @@ interface Attachment {
 }
 
 type attachmentProps = Omit<LoadoutAttachments, "id">;
+type buildAttachments = Omit<AttachmentBuild, "name">;
 
 interface LoadoutAttachments extends Attachment {
   name: string;
 }
+
+type WeaponBuild = {
+  name: string;
+  attachmentId: number;
+  attachments: Array<buildAttachments | undefined>;
+  likes: number;
+  visible: boolean;
+};
 
 type ProfileInput = {
   username: string;
@@ -88,3 +97,14 @@ type ProfileInput = {
   is_streamer: boolean;
   language?: string;
 };
+
+type WeaponWithAttach = {
+  name: string;
+  brand: string;
+  image: string;
+  type: string;
+  bullets: string;
+  Attachments?: AttachmentProps[];
+};
+
+type buildAttachments2 = Omit<WeaponWithAttach, "Attachments">;

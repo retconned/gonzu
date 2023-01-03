@@ -1,7 +1,12 @@
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
 import TuneModal from "../components/TuneModal";
-import type { AttachmentProps, WeaponBuild } from "../types/types";
+import type {
+  AttachmentProps,
+  WeaponBuild,
+  WeaponWithAttach,
+  buildAttachments,
+} from "../types/types";
 
 import { trpc } from "../utils/trpc";
 
@@ -34,7 +39,7 @@ const LoadoutBuilder = () => {
       {
         name: loadoutName,
         weaponBody: weapon,
-        attachments: weaponBuild?.attachments as any,
+        attachments: weaponBuild?.attachments as Array<buildAttachments>,
       },
       {
         onSuccess: (data) => {
@@ -46,10 +51,11 @@ const LoadoutBuilder = () => {
   };
   useEffect(() => {
     if (typeof getWeaponByName !== "undefined") {
-      const clone: any = { ...getWeaponByName[0] };
-      delete clone["Attachments"];
+      const clone = { ...getWeaponByName[0] } as unknown;
+      delete (clone as WeaponWithAttach)["Attachments"];
+
       setWeaponBuild({
-        ...clone,
+        ...(clone as WeaponBuild),
         attachments: [],
       });
     }
@@ -59,7 +65,7 @@ const LoadoutBuilder = () => {
     verticalTune: number,
     horizontalTune: number,
   ) => {
-    setWeaponBuild((current: any) => {
+    setWeaponBuild((current) => {
       return current !== null
         ? {
             ...current,
@@ -230,7 +236,7 @@ const LoadoutBuilder = () => {
             </p>
             <div className="grid grid-cols-6 gap-4 text-lg text-white ">
               {getAllWeapons
-                ? getAllWeapons?.map((weapon: any) => {
+                ? getAllWeapons?.map((weapon: WeaponWithAttach) => {
                     return (
                       <button
                         onClick={() => {
@@ -261,7 +267,7 @@ const LoadoutBuilder = () => {
                           name={attachment.name}
                           slot={attachment.slot}
                           weaponBuild={weaponBuild}
-                          setWeaponBuild={setWeaponBuild}
+                          // setWeaponBuild={setWeaponBuild}
                           setSelectedAttachment={setSelectedAttachment}
                           setTuneModalVisibility={setTuneModalVisibility}
                         />
@@ -283,7 +289,6 @@ const AttachmentComponent = ({
   id,
   name,
   slot,
-  setWeaponBuild,
   setTuneModalVisibility,
   setSelectedAttachment,
 }: {
@@ -291,7 +296,6 @@ const AttachmentComponent = ({
   name: string;
   slot: string;
   weaponBuild: WeaponBuild | null;
-  setWeaponBuild: Dispatch<SetStateAction<WeaponBuild | null>>;
   setSelectedAttachment: Dispatch<SetStateAction<number>>;
   setTuneModalVisibility: Dispatch<SetStateAction<boolean>>;
 }) => {
