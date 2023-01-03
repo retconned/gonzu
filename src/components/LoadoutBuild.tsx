@@ -13,7 +13,12 @@ const LoadoutBuilder = () => {
   const [tuneModalVisibility, setTuneModalVisibility] =
     useState<boolean>(false);
 
+  const [assignToUsername, setAssignToUsername] = useState<string>();
+  const [lastLoadoutMade, setLastLoadoutMade] = useState<string>();
+  const [successAlert, setSuccessAlert] = useState<string>();
+
   const { data: getAllWeapons } = trpc.weapons.getAllWeapons.useQuery();
+  const { data: profileNames } = trpc.profile.getAllProfileNames.useQuery();
 
   const { data: getWeaponByName } =
     trpc.weapons.getWeaponByName.useQuery(weapon);
@@ -21,12 +26,23 @@ const LoadoutBuilder = () => {
   const { mutate: finalBuild, isLoading: finalBuildLoading } =
     trpc.loadout.createLoadout.useMutation();
 
+  const { mutate: addLoadoutToProfile } =
+    trpc.profile.addLoadoutToProfile.useMutation();
+
   const handleCreateLoadout = async () => {
-    finalBuild({
-      name: loadoutName,
-      weaponBody: weapon,
-      attachments: weaponBuild?.attachments as any,
-    });
+    finalBuild(
+      {
+        name: loadoutName,
+        weaponBody: weapon,
+        attachments: weaponBuild?.attachments as any,
+      },
+      {
+        onSuccess: (data) => {
+          console.log(data.id);
+          setLastLoadoutMade(data.id);
+        },
+      },
+    );
   };
   useEffect(() => {
     if (typeof getWeaponByName !== "undefined") {
@@ -61,10 +77,36 @@ const LoadoutBuilder = () => {
     setTuneModalVisibility(false);
   };
 
-  useEffect(() => {
-    // console.log(weaponBuild);
-  }, [weaponBuild]);
+  const getCurrentLoadout = trpc.profile.getCurrentLoadout.useQuery(
+    assignToUsername as string,
+    {
+      enabled: false,
+    },
+  );
 
+  //TODO: it needs to double click to assign to profile ** FIX THIS ***
+  const handleAddtoProfile = () => {
+    getCurrentLoadout.refetch();
+
+    if (getCurrentLoadout.data) {
+      const currentLoadout = getCurrentLoadout.data[0]?.loadouts;
+      const newLoadout = [
+        ...(currentLoadout as Array<string>),
+        lastLoadoutMade as string,
+      ];
+      addLoadoutToProfile(
+        {
+          username: assignToUsername as string,
+          loadoutId: newLoadout,
+        },
+        {
+          onSuccess: (data) => {
+            setSuccessAlert(`Assigned loadout to ${data.username} !`);
+          },
+        },
+      );
+    }
+  };
   return (
     <>
       <main className="flex min-h-screen flex-col items-center justify-center">
@@ -78,10 +120,42 @@ const LoadoutBuilder = () => {
           <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             Loadout
           </h1>
-          <div className="flex flex-col items-center gap-2"></div>
+          <div className="flex flex-col items-center justify-center gap-2 text-white">
+            <p className="mb-4 text-center text-2xl font-bold text-white">
+              Select a profile:
+            </p>
+            <div className="">
+              {assignToUsername ? (
+                <p className="mb-4 text-neutral-400">
+                  Selected profile:{" "}
+                  <span className="font-bold text-white">
+                    {assignToUsername}
+                  </span>
+                </p>
+              ) : (
+                ""
+              )}
+            </div>
+            <div className="grid grid-cols-6 items-center gap-2">
+              {profileNames?.map((profileName, i) => {
+                return (
+                  <div
+                    className="w-full rounded-md bg-neutral-800 px-2 py-1 text-center duration-150 hover:bg-neutral-700"
+                    key={i}
+                    onClick={() => {
+                      setAssignToUsername(profileName.username);
+                    }}
+                  >
+                    {profileName.username}
+                  </div>
+                );
+              })}
+            </div>
+            <div></div>
+          </div>
 
           <input
-            className="form-input rounded-md bg-neutral-800 p-1 text-center placeholder-neutral-400 placeholder:text-center"
+            className="form-input rounded-md bg-neutral-800 p-1 text-center text-white placeholder-neutral-400 placeholder:text-center"
             onChange={(e) => {
               setLoadoutName(e.target.value);
             }}
@@ -96,6 +170,32 @@ const LoadoutBuilder = () => {
           >
             Create Loadout
           </button>
+
+          {lastLoadoutMade ? (
+            <div className="flex flex-col items-center justify-center gap-4 rounded-md bg-neutral-700/30 p-4 text-white">
+              <div>
+                {lastLoadoutMade ? (
+                  <p>
+                    Created loadout:{" "}
+                    <span className="font-bold">{lastLoadoutMade}</span>{" "}
+                  </p>
+                ) : (
+                  "no loadouts made yet!"
+                )}
+              </div>
+              <button
+                className="w-fit rounded-md bg-red-500 p-2 font-bold text-white duration-150 hover:bg-red-700"
+                onClick={handleAddtoProfile}
+              >
+                Assign to {assignToUsername}
+              </button>
+              <p className="text-green-500">
+                {successAlert ? successAlert : ""}
+              </p>
+            </div>
+          ) : (
+            ""
+          )}
 
           {weaponBuild != null &&
           weaponBuild.attachments != undefined &&
