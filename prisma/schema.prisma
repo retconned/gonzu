@@ -95,15 +95,16 @@ model Loadout {
 }
 
 model Profile {
-  username    String   @unique()
-  loadouts    Json
-  twitch      String?
-  twitter     String?
-  youtube     String?
-  tiktok      String?
-  instagram   String?
-  is_live     String?
-  is_streamer Boolean  @default(true)
-  updatedAt   DateTime @updatedAt
-  language    String   @default("en")
+  username          String   @unique()
+  profile_image_url String?
+  loadouts          Json
+  twitch            String?
+  twitter           String?
+  youtube           String?
+  tiktok            String?
+  instagram         String?
+  is_live           String?
+  is_streamer       Boolean  @default(true)
+  updatedAt         DateTime @updatedAt
+  language          String   @default("en")
 }
