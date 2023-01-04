@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 import LoadoutModal from "../../components/LoadoutModal";
 import NavBar from "../../components/NavBar";
 import SmallerLoadout from "../../components/SmallerLoadout";
-import type { LoadoutAttachments } from "../../types/types";
+import type { AttachmentBuild, LoadoutAttachments } from "../../types/types";
 import { trpc } from "../../utils/trpc";
 
 const Loadout: NextPage = () => {
@@ -14,9 +14,6 @@ const Loadout: NextPage = () => {
   const loadoutId = router.query.loadout;
 
   const profile = router.query.profile as string;
-
-  // console.log(profile);
-
   const [profileLoadouts, setProfileLoadouts] = useState<Array<string>>([""]);
 
   const getProfile = trpc.profile.getUnqiueProfile.useQuery(profile);
@@ -35,15 +32,19 @@ const Loadout: NextPage = () => {
 
   const profileLoadoutsData = getProfileLoadouts.data;
 
-  (getLoadout.data?.attachments as Array<any>)?.forEach((loadedAttach) => {
-    getLoadout.data?.Weapon.Attachments.forEach((avalAttachment) => {
-      if (avalAttachment.id == loadedAttach.id) {
-        loadedAttach["name"] = loadedAttach["type"];
-        loadedAttach.name = avalAttachment.name;
-        return loadedAttach;
-      }
-    });
-  });
+  // console.log(getLoadout.data?.attachments);
+  (getLoadout.data?.attachments as Array<AttachmentBuild>)?.forEach(
+    (loadedAttach: any) => {
+      // console.log(loadedAttach);
+      getLoadout.data?.Weapon.Attachments.forEach((avalAttachment) => {
+        if (avalAttachment.id == loadedAttach.id) {
+          loadedAttach["name"] = loadedAttach["type"];
+          loadedAttach.name = avalAttachment.name;
+          return loadedAttach;
+        }
+      });
+    },
+  );
 
   return (
     <div className="flex h-full flex-col items-center justify-between bg-neutral-900">

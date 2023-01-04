@@ -43,7 +43,7 @@ const LoadoutBuilder = () => {
       },
       {
         onSuccess: (data) => {
-          console.log(data.id);
+          // console.log(data.id);
           setLastLoadoutMade(data.id);
         },
       },
@@ -113,6 +113,16 @@ const LoadoutBuilder = () => {
       );
     }
   };
+
+  const allAttachmentsSlots: Array<string> = [];
+  getAllWeapons?.map((weapon) => {
+    weapon.Attachments.map((attachment) => {
+      allAttachmentsSlots.push(attachment.slot);
+    });
+    return allAttachmentsSlots;
+  });
+  const attachmentSlotNames = [...new Set(allAttachmentsSlots)];
+
   return (
     <>
       <main className="flex min-h-screen flex-col items-center justify-center">
@@ -252,31 +262,29 @@ const LoadoutBuilder = () => {
                 : "Loading weapon..."}
             </div>
           </div>
-          <div className="flex flex-col items-center">
-            <p className="mb-4 text-2xl font-bold text-white">
-              select your atatchments:
-            </p>
-            <div className="grid grid-cols-5 gap-4 text-xl text-white">
-              {getWeaponByName
-                ? getWeaponByName[0]?.Attachments.map(
-                    (attachment: AttachmentProps) => {
-                      return (
-                        <AttachmentComponent
-                          key={attachment.name}
-                          id={attachment.id}
-                          name={attachment.name}
-                          slot={attachment.slot}
-                          weaponBuild={weaponBuild}
-                          // setWeaponBuild={setWeaponBuild}
-                          setSelectedAttachment={setSelectedAttachment}
-                          setTuneModalVisibility={setTuneModalVisibility}
-                        />
-                      );
-                    },
-                  )
-                : "Loading attachments..."}
+          {getWeaponByName && weapon != "" ? (
+            <div className="flex flex-col items-center">
+              <p className="mb-4 text-2xl font-bold text-white">
+                select your attatchments:
+              </p>
+              {attachmentSlotNames.map((attachmentName, i) => {
+                return (
+                  <FilteredATtachment
+                    key={i}
+                    filterBy={attachmentName}
+                    getWeaponByName={getWeaponByName}
+                    setSelectedAttachment={setSelectedAttachment}
+                    setTuneModalVisibility={setTuneModalVisibility}
+                    weaponBuild={weaponBuild}
+                  />
+                );
+              })}
             </div>
-          </div>
+          ) : (
+            <p className="mb-4 text-2xl font-bold text-red-500">
+              select a weapon to see attachments!
+            </p>
+          )}
         </div>
       </main>
     </>
@@ -307,10 +315,60 @@ const AttachmentComponent = ({
   return (
     <button
       onClick={() => handleAttachmentSelect()}
-      className=" rounded-md bg-neutral-800 px-2 py-1 text-center duration-150 hover:bg-neutral-700"
+      className="h-32 w-40 rounded-md bg-neutral-800 px-2 py-1 text-center duration-150 hover:bg-neutral-700"
     >
       <p className="text-neutral-400 ">{slot}</p>
       <p>{name}</p>
     </button>
+  );
+};
+
+const FilteredATtachment = ({
+  getWeaponByName,
+  weaponBuild,
+  setSelectedAttachment,
+  setTuneModalVisibility,
+  filterBy,
+}: {
+  getWeaponByName: WeaponWithAttach[];
+  weaponBuild: WeaponBuild | null;
+  setSelectedAttachment: Dispatch<SetStateAction<number>>;
+  setTuneModalVisibility: Dispatch<SetStateAction<boolean>>;
+  filterBy: string;
+}) => {
+  console.log();
+  return (
+    <div className="flex flex-col ">
+      <p className=" py-4 text-center text-xl font-medium text-white">{`${filterBy}`}</p>
+      <div className="grid grid-cols-6 gap-3 text-xl text-white">
+        {getWeaponByName[0]?.Attachments?.sort(
+          (a: AttachmentProps, b: AttachmentProps) => {
+            const nameA = a.slot.toUpperCase();
+            const nameB = b.slot.toUpperCase();
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            return 0;
+          },
+        ).map((attachment: AttachmentProps) =>
+          attachment.slot == filterBy ? (
+            <AttachmentComponent
+              key={attachment.name}
+              id={attachment.id}
+              name={attachment.name}
+              slot={attachment.slot}
+              weaponBuild={weaponBuild}
+              setSelectedAttachment={setSelectedAttachment}
+              setTuneModalVisibility={setTuneModalVisibility}
+            />
+          ) : (
+            ""
+          ),
+        )}
+      </div>
+    </div>
   );
 };
