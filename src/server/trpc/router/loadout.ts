@@ -45,26 +45,6 @@ export const loadoutRouter = router({
         },
       });
     }),
-  // getProfileLoadoutOld: publicProcedure
-  //   .input(z.array(z.string()))
-  //   .query(({ input, ctx }) => {
-  //     console.log(input);
-  //     return ctx.prisma.loadout.findMany({
-  //       where: {
-  //         id: {
-  //           in: input,
-  //         },
-  //       },
-  //       include: {
-  //         Weapon: {
-  //           select: {
-  //             type: true,
-  //             image: true,
-  //           },
-  //         },
-  //       },
-  //     });
-  //   }),
   getAllLoadouts: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.loadout.findMany();
   }),

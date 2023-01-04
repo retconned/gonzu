@@ -14,9 +14,6 @@ const Loadout: NextPage = () => {
   const loadoutId = router.query.loadout;
 
   const profile = router.query.profile as string;
-
-  // console.log(profile);
-
   const [profileLoadouts, setProfileLoadouts] = useState<Array<string>>([""]);
 
   const getProfile = trpc.profile.getUnqiueProfile.useQuery(profile);

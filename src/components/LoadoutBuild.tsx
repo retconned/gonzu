@@ -43,7 +43,7 @@ const LoadoutBuilder = () => {
       },
       {
         onSuccess: (data) => {
-          console.log(data.id);
+          // console.log(data.id);
           setLastLoadoutMade(data.id);
         },
       },
