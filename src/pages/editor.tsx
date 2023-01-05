@@ -51,6 +51,7 @@ const LoadoutEditor = () => {
       },
     );
   };
+
   useEffect(() => {
     if (typeof getWeaponByName !== "undefined") {
       const clone = { ...getWeaponByName[0] } as unknown;
@@ -85,12 +86,28 @@ const LoadoutEditor = () => {
     setTuneModalVisibility(false);
   };
 
+  const handleGetLoadouts = () => {
+    getCurrentLoadout.refetch();
+
+    if (getCurrentLoadout.data) {
+      console.log(getCurrentLoadout.data[0]?.loadouts);
+
+      setProfileLoadouts(getCurrentLoadout.data[0]?.loadouts as Array<string>);
+
+      getProfileLoadouts.refetch();
+      if (getProfileLoadouts) {
+        console.log(getProfileLoadouts.data);
+      }
+    }
+  };
+
   const getCurrentLoadout = trpc.loadout.getCurrentUserLoadout.useQuery(
     selectedProfile as string,
     {
       enabled: false,
     },
   );
+
   const allAttachmentsSlots: Array<string> = [];
   getAllWeapons?.map((weapon) => {
     weapon.Attachments.map((attachment) => {
@@ -148,20 +165,7 @@ const LoadoutEditor = () => {
           </div>
           <button
             className="w-fit rounded-md bg-red-500 p-2 font-bold text-white duration-150 hover:bg-red-700"
-            onClick={() => {
-              getCurrentLoadout.refetch();
-
-              if (getCurrentLoadout.data) {
-                console.log(getCurrentLoadout.data[0]?.loadouts);
-
-                setProfileLoadouts(
-                  getCurrentLoadout.data[0]?.loadouts as Array<string>,
-                );
-
-                getProfileLoadouts.refetch();
-                console.log(getProfileLoadouts.data);
-              }
-            }}
+            onClick={handleGetLoadouts}
           >
             Get {selectedProfile}
             {`'`}s loadouts
@@ -175,8 +179,6 @@ const LoadoutEditor = () => {
                   onClick={() => {
                     setSelectedLoadout(loadout.id);
                     setWeapon(loadout.weaponBody);
-                    console.log("selected:", selectedLoadout);
-                    console.log("weaponbody:", weapon);
                   }}
                 >
                   {loadout.loadoutName}
@@ -202,7 +204,6 @@ const LoadoutEditor = () => {
                 <p>
                   Body: <span className="font-bold">{weaponBuild?.name}</span>
                 </p>
-
                 <div className="flex flex-col gap-2">
                   {weaponBuild?.attachments.map((attachment, i) => {
                     return (
@@ -242,7 +243,7 @@ const LoadoutEditor = () => {
             </div>
           ) : (
             <p className="mb-4 text-2xl font-bold text-red-500">
-              select a a loadout to edit!
+              select a loadout to edit!
             </p>
           )}
         </div>
