@@ -73,4 +73,33 @@ export const loadoutRouter = router({
         },
       });
     }),
+  addLoadoutToProfile: publicProcedure
+    .input(
+      z.object({
+        username: z.string(),
+        loadoutId: z.array(z.string()),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      return await ctx.prisma.profile.update({
+        where: {
+          username: input.username,
+        },
+        data: {
+          loadouts: input.loadoutId,
+        },
+      });
+    }),
+  getCurrentUserLoadout: publicProcedure
+    .input(z.string())
+    .query(({ input, ctx }) => {
+      return ctx.prisma.profile.findMany({
+        where: {
+          username: input,
+        },
+        select: {
+          loadouts: true,
+        },
+      });
+    }),
 });

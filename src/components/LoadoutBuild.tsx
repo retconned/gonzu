@@ -31,7 +31,7 @@ const LoadoutBuilder = () => {
     trpc.loadout.createLoadout.useMutation();
 
   const { mutate: addLoadoutToProfile } =
-    trpc.profile.addLoadoutToProfile.useMutation();
+    trpc.loadout.addLoadoutToProfile.useMutation();
 
   const handleCreateLoadout = async () => {
     finalBuild(
@@ -81,7 +81,7 @@ const LoadoutBuilder = () => {
     setTuneModalVisibility(false);
   };
 
-  const getCurrentLoadout = trpc.profile.getCurrentLoadout.useQuery(
+  const getCurrentLoadout = trpc.loadout.getCurrentUserLoadout.useQuery(
     assignToUsername as string,
     {
       enabled: false,
