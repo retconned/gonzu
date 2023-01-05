@@ -13,7 +13,6 @@ import { trpc } from "../utils/trpc";
 const LoadoutBuilder = () => {
   const [weapon, setWeapon] = useState("");
   const [weaponBuild, setWeaponBuild] = useState<WeaponBuild | null>(null);
-  const [loadoutName, setLoadoutName] = useState<string>("");
   const [selectedAttachment, setSelectedAttachment] = useState<number>(0);
   const [tuneModalVisibility, setTuneModalVisibility] =
     useState<boolean>(false);
@@ -37,13 +36,12 @@ const LoadoutBuilder = () => {
   const handleCreateLoadout = async () => {
     finalBuild(
       {
-        name: loadoutName,
+        name: `${assignToUsername}'s ${weapon} Build`,
         weaponBody: weapon,
         attachments: weaponBuild?.attachments as Array<buildAttachments>,
       },
       {
         onSuccess: (data) => {
-          // console.log(data.id);
           setLastLoadoutMade(data.id);
         },
       },
@@ -136,7 +134,7 @@ const LoadoutBuilder = () => {
           <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             Loadout
           </h1>
-          <div className="flex flex-col items-center justify-center gap-2 text-white">
+          <div className="flex w-full flex-col items-center justify-center gap-2 text-white">
             <p className="mb-4 text-center text-2xl font-bold text-white">
               Select a profile:
             </p>
@@ -152,32 +150,23 @@ const LoadoutBuilder = () => {
                 ""
               )}
             </div>
-            <div className="grid grid-cols-6 items-center gap-2">
+            <div className="grid w-full grid-cols-6 items-center gap-4">
               {profileNames?.map((profileName, i) => {
                 return (
-                  <div
-                    className="w-full rounded-md bg-neutral-800 px-2 py-1 text-center duration-150 hover:bg-neutral-700"
+                  <button
+                    className="w-full rounded-md bg-neutral-800 px-2 py-2 text-center duration-150 hover:bg-neutral-700"
                     key={i}
                     onClick={() => {
                       setAssignToUsername(profileName.username);
                     }}
                   >
                     {profileName.username}
-                  </div>
+                  </button>
                 );
               })}
             </div>
             <div></div>
           </div>
-
-          <input
-            className="form-input rounded-md bg-neutral-800 p-1 text-center text-white placeholder-neutral-400 placeholder:text-center"
-            onChange={(e) => {
-              setLoadoutName(e.target.value);
-            }}
-            type="text"
-            placeholder="loadout name"
-          />
 
           <button
             className="rounded-md  bg-blue-500 p-2 font-bold text-white duration-150 hover:bg-blue-700"
@@ -216,7 +205,7 @@ const LoadoutBuilder = () => {
           {weaponBuild != null &&
           weaponBuild.attachments != undefined &&
           weaponBuild.name ? (
-            <div className="flex flex-col gap-2 rounded-md bg-neutral-800 p-2 text-center text-white">
+            <div className="flex flex-col rounded-md bg-neutral-800 p-2 text-center text-white">
               <p>Build preview!</p>
               <p>
                 Body: <span className="font-bold">{weaponBuild?.name}</span>
@@ -338,7 +327,7 @@ const FilteredATtachment = ({
 }) => {
   console.log();
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col">
       <p className=" py-4 text-center text-xl font-medium text-white">{`${filterBy}`}</p>
       <div className="grid grid-cols-6 gap-3 text-xl text-white">
         {getWeaponByName[0]?.Attachments?.sort(
