@@ -39,35 +39,31 @@ const ProfileBar = ({
         <p className="pb-1 text-lg font-medium">{username}</p>
       </div>
       <div className="flex flex-row items-center justify-center space-x-4">
-        <a href={twitch != null ? `https://www.twitch.tv/${twitch}` : ""}>
+        <a href={twitch != null ? `${twitch}` : ""}>
           <FaTwitch
             size={22}
             className="fill-lime-400 duration-100 hover:fill-lime-600"
           />
         </a>
-        <a href={twitter != null ? `https://twitter.com/${twitter}` : ""}>
+        <a href={twitter != null ? `${twitter}` : ""}>
           <FaTwitter
             size={22}
             className="fill-lime-400 duration-100 hover:fill-lime-600"
           />
         </a>
-        <a href={youtube != null ? `https://www.youtube.com/@${youtube}` : ""}>
+        <a href={youtube != null ? `${youtube}` : ""}>
           <FaYoutube
             size={22}
             className="fill-lime-400 duration-100 hover:fill-lime-600"
           />
         </a>
-        <a href={tiktok != null ? `https://www.tiktok.com/@${tiktok}` : ""}>
+        <a href={tiktok != null ? `${tiktok}` : ""}>
           <FaTiktok
             size={22}
             className="fill-lime-400 duration-100 hover:fill-lime-600"
           />
         </a>
-        <a
-          href={
-            instagram != null ? `https://www.instagram.com/${instagram}` : ""
-          }
-        >
+        <a href={instagram != null ? `${instagram}` : ""}>
           <FaInstagram
             size={22}
             className="fill-lime-400 duration-100 hover:fill-lime-600"
