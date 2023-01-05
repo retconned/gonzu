@@ -11,15 +11,15 @@ import type {
 import { trpc } from "../utils/trpc";
 
 const LoadoutBuilder = () => {
-  const [weapon, setWeapon] = useState("");
+  const [weapon, setWeapon] = useState<string>("");
   const [weaponBuild, setWeaponBuild] = useState<WeaponBuild | null>(null);
   const [selectedAttachment, setSelectedAttachment] = useState<number>(0);
   const [tuneModalVisibility, setTuneModalVisibility] =
     useState<boolean>(false);
 
-  const [assignToUsername, setAssignToUsername] = useState<string>();
-  const [lastLoadoutMade, setLastLoadoutMade] = useState<string>();
-  const [successAlert, setSuccessAlert] = useState<string>();
+  const [assignToUsername, setAssignToUsername] = useState<string>("");
+  const [lastLoadoutMade, setLastLoadoutMade] = useState<string>("");
+  const [successAlert, setSuccessAlert] = useState<string>("");
 
   const { data: getAllWeapons } = trpc.weapons.getAllWeapons.useQuery();
   const { data: profileNames } = trpc.profile.getAllProfileNames.useQuery();
@@ -27,8 +27,7 @@ const LoadoutBuilder = () => {
   const { data: getWeaponByName } =
     trpc.weapons.getWeaponByName.useQuery(weapon);
 
-  const { mutate: finalBuild, isLoading: finalBuildLoading } =
-    trpc.loadout.createLoadout.useMutation();
+  const { mutate: finalBuild } = trpc.loadout.createLoadout.useMutation();
 
   const { mutate: addLoadoutToProfile } =
     trpc.loadout.addLoadoutToProfile.useMutation();
@@ -171,7 +170,6 @@ const LoadoutBuilder = () => {
           <button
             className="rounded-md  bg-blue-500 p-2 font-bold text-white duration-150 hover:bg-blue-700"
             onClick={handleCreateLoadout}
-            disabled={finalBuildLoading}
           >
             Create Loadout
           </button>
@@ -309,7 +307,7 @@ const AttachmentComponent = ({
   );
 };
 
-const FilteredATtachment = ({
+export const FilteredATtachment = ({
   getWeaponByName,
   weaponBuild,
   setSelectedAttachment,
