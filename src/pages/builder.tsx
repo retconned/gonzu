@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import LoadoutBuilder from "../components/LoadoutBuild";
 import ProfileBuild from "../components/ProfileBuild";
+import ProfileUpdater from "../components/ProfileUpdate";
 
 const Builder: NextPage = () => {
   return (
@@ -14,7 +15,10 @@ const Builder: NextPage = () => {
       <main className="flex min-h-screen flex-row items-center justify-center bg-neutral-900">
         <div className="flex min-h-screen w-10/12 flex-row justify-between">
           <LoadoutBuilder />
-          <ProfileBuild />
+          <div className="flex flex-col">
+            <ProfileBuild />
+            <ProfileUpdater />
+          </div>
         </div>
       </main>
     </>

@@ -44,6 +44,43 @@ export const profileRouter = router({
         },
       });
     }),
+  updateProfile: publicProcedure
+    .input(
+      z.object({
+        username: z.string(),
+        twitch: z.string().optional(),
+        twitter: z.string().optional(),
+        youtube: z.string().optional(),
+        tiktok: z.string().optional(),
+        instagram: z.string().optional(),
+        language: z.string().optional(),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      return await ctx.prisma.profile.updateMany({
+        where: {
+          username: input.username.toLowerCase(),
+        },
+        data: {
+          twitch:
+            input.twitch != "" ? `https://www.twitch.tv/${input.twitch}` : null,
+          twitter:
+            input.twitter != ""
+              ? `https://www.twitter.com/${input.twitter}`
+              : null,
+          youtube: input.youtube != "" ? input.youtube : null,
+          tiktok:
+            input.tiktok != ""
+              ? `https://www.tiktok.com/@${input.tiktok}`
+              : null,
+          instagram:
+            input.instagram != ""
+              ? `https://www.instagram.com/${input.instagram}`
+              : null,
+          language: input.language != "" ? input.language : "en",
+        },
+      });
+    }),
   getAllProfileNames: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.profile.findMany({
       select: {

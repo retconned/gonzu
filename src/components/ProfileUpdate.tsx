@@ -2,17 +2,18 @@ import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import type { ProfileInput } from "../types/types";
 import { trpc } from "../utils/trpc";
-const ProfileBuilder = () => {
+const ProfileUpdater = () => {
   const { register, handleSubmit } = useForm<ProfileInput>();
   const onSubmit: SubmitHandler<ProfileInput> = (data) => {
-    profileCreate(data);
+    // console.log(data);
+    profileUpdate(data);
   };
-  const { mutate: profileCreate } = trpc.profile.createProfile.useMutation();
+  const { mutate: profileUpdate } = trpc.profile.updateProfile.useMutation();
   return (
     <>
       <main className="flex flex-col items-start justify-start px-20">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <h1 className="text-2xl font-extrabold text-white">Create Profile</h1>
+          <p className="text-center text-2xl font-bold ">Update Profile</p>
           <div>
             <form
               onSubmit={handleSubmit(onSubmit)}
@@ -65,10 +66,11 @@ const ProfileBuilder = () => {
                 {...register("language", {})}
                 className="form-input rounded-md bg-neutral-800 p-1 text-center placeholder-neutral-400 placeholder:text-center"
               />
-
               <input
                 type="submit"
                 className="rounded-md bg-red-500 p-2 font-bold text-white duration-150 hover:bg-red-700"
+                placeholder=""
+                value="Update Profile"
               />
             </form>
           </div>
@@ -78,4 +80,4 @@ const ProfileBuilder = () => {
   );
 };
 
-export default ProfileBuilder;
+export default ProfileUpdater;
