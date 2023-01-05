@@ -285,13 +285,11 @@ export default LoadoutBuilder;
 const AttachmentComponent = ({
   id,
   name,
-  slot,
   setTuneModalVisibility,
   setSelectedAttachment,
 }: {
   id: number;
   name: string;
-  slot: string;
   weaponBuild: WeaponBuild | null;
   setSelectedAttachment: Dispatch<SetStateAction<number>>;
   setTuneModalVisibility: Dispatch<SetStateAction<boolean>>;
@@ -304,10 +302,9 @@ const AttachmentComponent = ({
   return (
     <button
       onClick={() => handleAttachmentSelect()}
-      className="h-32 w-40 rounded-md bg-neutral-800 px-2 py-1 text-center duration-150 hover:bg-neutral-700"
+      className="h-26 w-40 rounded-md bg-neutral-700 px-2 py-1 text-center duration-150 hover:bg-neutral-600"
     >
-      <p className="text-neutral-400 ">{slot}</p>
-      <p>{name}</p>
+      <p className=" text-lg">{name}</p>
     </button>
   );
 };
@@ -348,7 +345,6 @@ const FilteredATtachment = ({
               key={attachment.name}
               id={attachment.id}
               name={attachment.name}
-              slot={attachment.slot}
               weaponBuild={weaponBuild}
               setSelectedAttachment={setSelectedAttachment}
               setTuneModalVisibility={setTuneModalVisibility}
