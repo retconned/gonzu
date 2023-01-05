@@ -18,19 +18,19 @@ const TuneModal: NextPage<TuneModalProps> = ({
   const [verticalTune, setVerticalTune] = useState<number>(0);
 
   return (
-    <div className="fixed top-0 bottom-0 left-0 right-0 flex h-full w-full  items-center justify-center bg-neutral-900 bg-opacity-60 backdrop-blur-sm">
-      <div className="flex h-[420px] w-[500px] flex-col items-center justify-center gap-y-4 rounded-md bg-neutral-900  text-white ">
+    <div className="fixed top-0 bottom-0 left-0 right-0 flex h-full w-full  items-center justify-center bg-neutral-900 bg-opacity-60  backdrop-blur-sm">
+      <div className="flex h-[420px] w-[500px] flex-col items-center justify-center gap-y-4 rounded-md bg-neutral-900  text-white shadow-sm shadow-black/40">
         <p>add tunning amount</p>
         <input
           type="text"
           placeholder="Horizontal Tune"
-          onChange={(e) => setHorizontalTune(+e.target.value)}
+          onChange={(e) => setHorizontalTune(Number(e.target.value))}
           className="rounded-md bg-neutral-800 p-1 text-center placeholder:text-center "
         />
         <input
           type="text"
           placeholder="Vertical Tune"
-          onChange={(e) => setVerticalTune(+e.target.value)}
+          onChange={(e) => setVerticalTune(Number(e.target.value))}
           className="rounded-md bg-neutral-800 p-1 text-center placeholder:text-center"
         />
         <button
