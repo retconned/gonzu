@@ -73,6 +73,29 @@ export const loadoutRouter = router({
         },
       });
     }),
+  updateLoadoutById: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        attachments: z.array(
+          z.object({
+            id: z.number(),
+            horizontalTune: z.number(),
+            verticalTune: z.number(),
+          }),
+        ),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      return await ctx.prisma.loadout.updateMany({
+        where: {
+          id: input.id,
+        },
+        data: {
+          attachments: input.attachments,
+        },
+      });
+    }),
   addLoadoutToProfile: publicProcedure
     .input(
       z.object({
