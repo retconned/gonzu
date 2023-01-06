@@ -29,14 +29,19 @@ const ProfileBar = ({
   return (
     <div className="flex w-8/12 flex-wrap items-center justify-between rounded-md border border-neutral-700 bg-neutral-800 px-10 py-4 text-neutral-200">
       <div className="flex flex-row items-center space-x-4 ">
-        <Image
-          src={imageSrc}
-          alt=""
-          width={30}
-          height={30}
-          className="overflow-hidden rounded-full "
-        />
-        <p className="pb-1 text-lg font-medium">{username}</p>
+        <div className=" flex items-center gap-4 text-neutral-200 ">
+          <Image
+            src={imageSrc}
+            alt={`${username}'s profile picture`}
+            width={30}
+            height={30}
+            className="overflow-hidden rounded-full"
+          />
+
+          <p className="select-none text-lg font-medium duration-150 hover:text-lime-400">
+            {username}
+          </p>
+        </div>
       </div>
       <div className="flex flex-row items-center justify-center space-x-4">
         <a href={twitch != null ? `${twitch}` : ""}>
