@@ -19,7 +19,7 @@ const SmallerLoadout = ({
       <div className="flex max-w-sm flex-col items-center justify-center space-y-2 rounded-md border border-neutral-700 bg-neutral-800 p-4">
         <Image
           src={imageSrc}
-          alt="weapon's picture"
+          alt={`${weaponBody}'s thumbnail image`}
           width={292.5}
           height={146.25}
           className="h-[146.25px] w-[292.5px] select-none md:h-[146.25px] md:w-[292.5px]"
@@ -38,7 +38,7 @@ const SmallerLoadout = ({
           </p>
         </div>
         <Link href={`${loadoutLink}`}>
-          <button className="w-full rounded-md border border-lime-400 px-2 py-1 text-center text-lime-400 duration-150 hover:bg-lime-400 hover:text-neutral-800">
+          <button className="mt-2 w-full rounded-md border border-lime-400 px-2 py-2 text-center text-lime-400 duration-150 hover:bg-lime-400 hover:text-white">
             View build {">"}
           </button>
         </Link>
