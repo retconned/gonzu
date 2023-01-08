@@ -1,13 +1,13 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import CategoryTitle from "../../components/CategoryTitle";
-import Footer from "../../components/Footer";
-import LoadoutModal from "../../components/LoadoutModal";
-import NavBar from "../../components/NavBar";
-import SmallerLoadout from "../../components/SmallerLoadout";
-import type { AttachmentBuild, LoadoutAttachments } from "../../types/types";
-import { trpc } from "../../utils/trpc";
+import CategoryTitle from "../../../components/CategoryTitle";
+import Footer from "../../../components/Footer";
+import LoadoutModal from "../../../components/LoadoutModal";
+import NavBar from "../../../components/NavBar";
+import SmallerLoadout from "../../../components/SmallerLoadout";
+import type { AttachmentBuild, LoadoutAttachments } from "../../../types/types";
+import { trpc } from "../../../utils/trpc";
 
 const Loadout: NextPage = () => {
   const router = useRouter();

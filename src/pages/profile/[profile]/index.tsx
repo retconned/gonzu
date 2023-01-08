@@ -1,12 +1,12 @@
 import { type NextPage } from "next";
 import { useEffect, useState } from "react";
-import Footer from "../../components/Footer";
-import ProfileBar from "../../components/ProfileBar";
-import { trpc } from "../../utils/trpc";
+import Footer from "../../../components/Footer";
+import ProfileBar from "../../../components/ProfileBar";
+import { trpc } from "../../../utils/trpc";
 
 import { useRouter } from "next/router";
-import NavBar from "../../components/NavBar";
-import SmallerLoadout from "../../components/SmallerLoadout";
+import NavBar from "../../../components/NavBar";
+import SmallerLoadout from "../../../components/SmallerLoadout";
 
 const Profile: NextPage = () => {
   const router = useRouter();
