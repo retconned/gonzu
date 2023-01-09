@@ -108,3 +108,7 @@ type WeaponWithAttach = {
 };
 
 type buildAttachments2 = Omit<WeaponWithAttach, "Attachments">;
+
+interface LoadedAttachmentType extends AttachmentBuild {
+  name: string | number;
+}

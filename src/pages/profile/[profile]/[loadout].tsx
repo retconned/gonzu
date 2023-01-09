@@ -6,7 +6,11 @@ import Footer from "../../../components/Footer";
 import LoadoutModal from "../../../components/LoadoutModal";
 import NavBar from "../../../components/NavBar";
 import SmallerLoadout from "../../../components/SmallerLoadout";
-import type { AttachmentBuild, LoadoutAttachments } from "../../../types/types";
+import type {
+  AttachmentBuild,
+  LoadedAttachmentType,
+  LoadoutAttachments,
+} from "../../../types/types";
 import { trpc } from "../../../utils/trpc";
 
 const Loadout: NextPage = () => {
@@ -34,15 +38,22 @@ const Loadout: NextPage = () => {
 
   // console.log(getLoadout.data?.attachments);
   (getLoadout.data?.attachments as Array<AttachmentBuild>)?.forEach(
-    (loadedAttach: any) => {
+    (loadedAttach: LoadedAttachmentType) => {
       // console.log(loadedAttach);
-      getLoadout.data?.Weapon.Attachments.forEach((avalAttachment) => {
-        if (avalAttachment.id == loadedAttach.id) {
-          loadedAttach["name"] = loadedAttach["type"];
-          loadedAttach.name = avalAttachment.name;
-          return loadedAttach;
-        }
-      });
+      getLoadout.data?.Weapon.Attachments.forEach(
+        (avalAttachment: { id: number; name: string | number }) => {
+          if (avalAttachment.id === loadedAttach.id) {
+            // something might be buggy here
+            loadedAttach["name"] =
+              loadedAttach["type" as keyof LoadedAttachmentType];
+            loadedAttach.name = avalAttachment.name;
+            console.log(loadedAttach);
+            return loadedAttach;
+          } else {
+            // console.log("xyz", avalAttachment.id);
+          }
+        },
+      );
     },
   );
 
