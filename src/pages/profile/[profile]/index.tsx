@@ -33,38 +33,43 @@ const Profile: NextPage = () => {
   return (
     <div className="flex h-full flex-col items-center justify-between bg-neutral-900">
       <NavBar />
-      {profileData ? (
-        <ProfileBar
-          imageSrc="/symfuhny.jpg"
-          username={profileData.username}
-          key={profileData.username}
-          instagram={profileData.instagram}
-          tiktok={profileData.tiktok}
-          twitch={profileData.twitch}
-          twitter={profileData.twitter}
-          youtube={profileData.youtube}
-        />
-      ) : (
-        <p>loading</p>
-      )}
-      <div className="flex w-8/12 items-center justify-center">
-        <div className="grid grid-cols-4 gap-6">
-          {profileLoadoutsData ? (
-            profileLoadoutsData.map((loadout) => {
-              return (
-                <SmallerLoadout
-                  key={loadout.id}
-                  loadoutLink={`${profile}/${loadout.id}`}
-                  imageSrc={loadout.Weapon.image}
-                  loadoutName={loadout.loadoutName}
-                  weaponType={loadout.Weapon.type}
-                  weaponBody={loadout.weaponBody}
-                />
-              );
-            })
-          ) : (
-            <p>loading</p>
-          )}
+      <div className="flex w-full flex-col items-center justify-between gap-y-4 py-6">
+        {profileData ? (
+          <ProfileBar
+            imageSrc={
+              profileData.profile_image_url != null
+                ? (profileData.profile_image_url as string)
+                : ("" as string)
+            }
+            username={profileData.username}
+            key={profileData.username}
+            tiktok={profileData.tiktok}
+            twitch={profileData.twitch}
+            twitter={profileData.twitter}
+            youtube={profileData.youtube}
+          />
+        ) : (
+          <p>loading</p>
+        )}
+        <div className="flex w-8/12 items-center justify-center">
+          <div className="grid grid-cols-4 gap-6">
+            {profileLoadoutsData ? (
+              profileLoadoutsData.map((loadout) => {
+                return (
+                  <SmallerLoadout
+                    key={loadout.id}
+                    loadoutLink={`${profile}/${loadout.id}`}
+                    imageSrc={loadout.Weapon.image}
+                    loadoutName={loadout.loadoutName}
+                    weaponType={loadout.Weapon.type}
+                    weaponBody={loadout.weaponBody}
+                  />
+                );
+              })
+            ) : (
+              <p>loading</p>
+            )}
+          </div>
         </div>
       </div>
 

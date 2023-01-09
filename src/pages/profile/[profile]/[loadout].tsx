@@ -49,43 +49,45 @@ const Loadout: NextPage = () => {
   return (
     <div className="flex h-full flex-col items-center justify-between bg-neutral-900">
       <NavBar />
-      <div className="w-8/12 px-4 py-4 text-neutral-200">
-        <button
-          onClick={() => {
-            router.back();
-          }}
-          className="w-fit rounded-md px-3.5 py-2.5  text-left text-sm text-white duration-200 hover:bg-neutral-700 hover:text-lime-400"
-        >
-          {"<  Go Back"}
-        </button>
-      </div>
-      <LoadoutModal
-        imageSrc={getLoadout.data?.Weapon.image as string}
-        loadoutName={getLoadout.data?.loadoutName as string}
-        lastUpdated={getLoadout.data?.updatedAt}
-        attachments={
-          getLoadout.data?.attachments as unknown as Array<LoadoutAttachments>
-        }
-      />
-      <CategoryTitle emoji="🔥" title={`Other builds by ${profile}`} />
-      <div className="flex w-8/12 items-center justify-center">
-        <div className="grid grid-cols-4 gap-6">
-          {profileLoadoutsData ? (
-            profileLoadoutsData.slice(0, 6).map((loadout) => {
-              return (
-                <SmallerLoadout
-                  key={loadout.id}
-                  loadoutLink={`/${profile}/${loadout.id}`}
-                  imageSrc={loadout.Weapon.image as string}
-                  loadoutName={loadout.loadoutName}
-                  weaponType={loadout.Weapon.type}
-                  weaponBody={loadout.weaponBody}
-                />
-              );
-            })
-          ) : (
-            <p>loading</p>
-          )}
+      <div className="flex w-full flex-col items-center justify-between gap-y-4  py-6">
+        <div className="w-8/12 px-4 text-neutral-200">
+          <button
+            onClick={() => {
+              router.back();
+            }}
+            className="w-fit rounded-md px-3.5 py-2.5  text-left text-sm text-white duration-200 hover:bg-neutral-700 hover:text-lime-400"
+          >
+            {"<  Go Back"}
+          </button>
+        </div>
+        <LoadoutModal
+          imageSrc={getLoadout.data?.Weapon.image as string}
+          loadoutName={getLoadout.data?.loadoutName as string}
+          lastUpdated={getLoadout.data?.updatedAt}
+          attachments={
+            getLoadout.data?.attachments as unknown as Array<LoadoutAttachments>
+          }
+        />
+        <CategoryTitle emoji="🔥" title={`Other builds by ${profile}`} />
+        <div className="flex w-8/12 items-center justify-center">
+          <div className="grid grid-cols-4 gap-6">
+            {profileLoadoutsData ? (
+              profileLoadoutsData.slice(0, 6).map((loadout) => {
+                return (
+                  <SmallerLoadout
+                    key={loadout.id}
+                    loadoutLink={`/${profile}/${loadout.id}`}
+                    imageSrc={loadout.Weapon.image as string}
+                    loadoutName={loadout.loadoutName}
+                    weaponType={loadout.Weapon.type}
+                    weaponBody={loadout.weaponBody}
+                  />
+                );
+              })
+            ) : (
+              <p>loading</p>
+            )}
+          </div>
         </div>
       </div>
       <Footer />
