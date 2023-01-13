@@ -112,3 +112,19 @@ type buildAttachments2 = Omit<WeaponWithAttach, "Attachments">;
 interface LoadedAttachmentType extends AttachmentBuild {
   name: string | number;
 }
+
+type profileBarProps = {
+  username: string;
+  imageSrc: string;
+  instagram: string | null;
+  twitter: string | null;
+  twitch: string | null;
+  tiktok: string | null;
+  youtube: string | null;
+};
+
+interface profileShowcaseProps extends profileBarProps {
+  profileLink: string;
+  loadouts: Array<string>;
+  input: string | undefined;
+}
