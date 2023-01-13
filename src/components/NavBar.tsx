@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FaBoxes, FaRobot, FaUserFriends } from "react-icons/fa";
 
 const NavBar = () => {
@@ -12,12 +13,15 @@ const NavBar = () => {
               Loadouts
             </p>
           </div>
-          <div className="group flex flex-shrink-0 flex-grow-0 items-center justify-start space-x-2 rounded-md px-3.5 py-2.5 duration-100 hover:bg-neutral-700 ">
-            <FaUserFriends className="fill-white group-hover:fill-lime-400" />
-            <p className="flex-shrink-0 flex-grow-0 text-left text-sm font-medium text-white group-hover:text-lime-400">
-              Streamers
-            </p>
-          </div>
+          <Link href={"/streamers"}>
+            <div className="group flex flex-shrink-0 flex-grow-0 items-center justify-start space-x-2 rounded-md px-3.5 py-2.5 duration-100 hover:bg-neutral-700 ">
+              <FaUserFriends className="fill-white group-hover:fill-lime-400" />
+              <p className="flex-shrink-0 flex-grow-0 text-left text-sm font-medium text-white group-hover:text-lime-400">
+                Streamers
+              </p>
+            </div>
+          </Link>
+
           <div className="group flex flex-shrink-0 flex-grow-0 items-center justify-start space-x-2 rounded-md px-3.5 py-2.5 duration-200 hover:bg-neutral-700 ">
             <FaRobot className="fill-white group-hover:fill-lime-400" />
             <p className="flex-shrink-0 flex-grow-0 text-left text-sm font-medium text-white group-hover:text-lime-400">
