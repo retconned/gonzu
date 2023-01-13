@@ -27,6 +27,7 @@ export const profileRouter = router({
         instagram: z.string().optional(),
         is_streamer: z.boolean(),
         language: z.string().optional(),
+        input: z.string(),
       }),
     )
     .mutation(async ({ input, ctx }) => {
@@ -41,6 +42,7 @@ export const profileRouter = router({
           instagram: `https://www.instagram.com/${input.instagram}`,
           is_streamer: input.is_streamer,
           language: input.language,
+          input: input.input,
         },
       });
     }),
@@ -54,6 +56,7 @@ export const profileRouter = router({
         tiktok: z.string().optional(),
         instagram: z.string().optional(),
         language: z.string().optional(),
+        input: z.string(),
       }),
     )
     .mutation(async ({ input, ctx }) => {
@@ -78,6 +81,7 @@ export const profileRouter = router({
               ? `https://www.instagram.com/${input.instagram}`
               : null,
           language: input.language != "" ? input.language : "en",
+          input: input.input,
         },
       });
     }),

@@ -28,7 +28,7 @@ const Streamers: NextPage = () => {
                     youtube={profile.youtube}
                     twitter={profile.twitter}
                     profileLink={`/profile/${profile.username}`}
-                    input={undefined}
+                    input={profile.input ? profile.input : undefined}
                   />
                 );
               })

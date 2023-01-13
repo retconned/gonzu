@@ -54,10 +54,15 @@ const ProfileBuilder = () => {
                   setValueAs: (v) => Boolean(v),
                 })}
               >
-                <option className="" value={"true"}>
-                  true
-                </option>
+                <option value={"true"}>true</option>
                 <option value={""}>false</option>
+              </select>
+              <select
+                className="form-select rounded-md bg-neutral-800 p-1 text-center placeholder:text-center"
+                {...register("input", {})}
+              >
+                <option value={"mouse"}>🖱 mouse</option>
+                <option value={"controller"}>🎮 controller</option>
               </select>
               <input
                 type="text"
