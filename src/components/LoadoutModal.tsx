@@ -22,14 +22,18 @@ const LoadoutModal = ({
             <span className="text-white">{lastUpdated?.toDateString()}</span>
           </p>
         </div>
-        <Image
-          src={imageSrc}
-          alt="weapon's picture"
-          width={390}
-          height={195}
-          className="h-[146.25px] w-[292.5px] select-none md:h-[195px] md:w-[390px]"
-          priority={true}
-        />
+        {imageSrc ? (
+          <Image
+            src={imageSrc}
+            alt="weapon's picture"
+            width={390}
+            height={195}
+            className="h-[146.25px] w-[292.5px] select-none md:h-[195px] md:w-[390px]"
+            priority={true}
+          />
+        ) : (
+          ""
+        )}
         {attachments ? (
           <div className="container m-auto flex flex-col items-center gap-4 md:grid md:grid-cols-2 md:flex-row md:flex-wrap-reverse md:justify-around md:gap-4 ">
             <div className="col-span-2 flex items-center justify-center">

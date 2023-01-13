@@ -87,7 +87,7 @@ const Loadout: NextPage = () => {
                 return (
                   <SmallerLoadout
                     key={loadout.id}
-                    loadoutLink={`/${profile}/${loadout.id}`}
+                    loadoutLink={`/profile/${profile}/${loadout.id}`}
                     imageSrc={loadout.Weapon.image as string}
                     loadoutName={loadout.loadoutName}
                     weaponType={loadout.Weapon.type}
