@@ -22,7 +22,7 @@ const SmallerLoadout = ({
           alt={`${weaponBody}'s thumbnail image`}
           width={292.5}
           height={146.25}
-          className="h-[146.25px] w-[292.5px] select-none md:h-[146.25px] md:w-[292.5px]"
+          className="h-[146.25px] w-[292.5px] select-none object-contain md:h-[146.25px] md:w-[292.5px]"
         />
         <div className="flex w-full flex-row items-end justify-between">
           <div className="">
