@@ -19,13 +19,17 @@ const ProfileBar = ({
     <div className="flex w-full flex-wrap items-center justify-between rounded-md border border-neutral-700 bg-neutral-800 px-10 py-4 text-neutral-200">
       <div className="flex flex-row items-center space-x-4 ">
         <div className=" flex items-center gap-4 text-neutral-200 ">
-          <Image
-            src={imageSrc}
-            alt={`${username}'s profile picture`}
-            width={30}
-            height={30}
-            className="overflow-hidden rounded-full"
-          />
+          {imageSrc != null && imageSrc != "" ? (
+            <Image
+              src={imageSrc}
+              alt={`${username}'s profile picture`}
+              width={30}
+              height={30}
+              className="overflow-hidden rounded-full"
+            />
+          ) : (
+            <div className="h-[30px] w-[30px] rounded-full bg-neutral-600" />
+          )}
 
           <p className="select-none text-lg font-medium duration-150 hover:text-lime-400">
             {username}
