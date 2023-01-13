@@ -13,7 +13,9 @@ const ProfileUpdater = () => {
     <>
       <main className="flex flex-col items-start justify-start px-20">
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <p className="text-center text-2xl font-bold ">Update Profile</p>
+          <p className="text-center text-2xl font-bold text-white">
+            Update Profile
+          </p>
           <div>
             <form
               onSubmit={handleSubmit(onSubmit)}
