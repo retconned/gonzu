@@ -49,6 +49,12 @@ const ProfileUpdater = () => {
                 placeholder="tiktok"
                 {...register("tiktok", {})}
               />
+              <input
+                className="form-input rounded-md bg-neutral-800 p-1 text-center placeholder-neutral-400 placeholder:text-center"
+                type="text"
+                placeholder="instagram"
+                {...register("instagram", {})}
+              />
               <select
                 className="form-select rounded-md bg-neutral-800 p-1 text-center placeholder:text-center"
                 {...register("is_streamer", {

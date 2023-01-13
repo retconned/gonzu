@@ -89,11 +89,11 @@ type WeaponBuild = {
 
 type ProfileInput = {
   username: string;
-  twitch?: string;
-  twitter?: string;
-  youtube?: string;
-  tiktok?: string;
-  instagram?: string;
+  twitch: string;
+  twitter: string;
+  youtube: string;
+  tiktok: string;
+  instagram: string;
   is_streamer: boolean;
   language?: string;
   input: string;
