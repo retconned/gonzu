@@ -107,4 +107,5 @@ model Profile {
   is_streamer       Boolean  @default(true)
   updatedAt         DateTime @updatedAt
   language          String   @default("en")
+  input             String?
 }

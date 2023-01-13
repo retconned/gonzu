@@ -96,6 +96,7 @@ type ProfileInput = {
   instagram?: string;
   is_streamer: boolean;
   language?: string;
+  input: string;
 };
 
 type WeaponWithAttach = {
