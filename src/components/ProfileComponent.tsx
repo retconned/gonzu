@@ -22,7 +22,7 @@ const ProfileComponent = ({
 }: profileShowcaseProps) => {
   return (
     <>
-      <div className="flex w-56 max-w-sm flex-col items-center justify-between space-y-2 rounded-md border border-neutral-700 bg-neutral-800 px-4 py-4">
+      <div className="flex w-56 max-w-sm flex-col items-center justify-between space-y-2 rounded-md border border-neutral-700 bg-neutral-800 px-4 py-4 duration-200 hover:border-lime-400">
         <div className="flex flex-col items-center justify-center gap-4">
           <div className="outline-5 outline-offset-2 outline-red-600">
             {imageSrc != null ? (
@@ -43,8 +43,8 @@ const ProfileComponent = ({
           </div>
         </div>
         <div className="flex w-full flex-col items-center justify-between">
-          <div className="rounded-md border border-neutral-700 p-1">
-            <p className="text-left text-sm text-neutral-400">
+          <div className="mb-1 rounded-md border border-neutral-700 p-1">
+            <p className=" text-left text-sm text-neutral-400">
               Loadouts:{" "}
               <span className="text-lime-300">{loadouts?.length}</span>
             </p>

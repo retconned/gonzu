@@ -22,9 +22,12 @@ const NavBar = () => {
             </div>
           </Link>
 
-          <div className="group flex flex-shrink-0 flex-grow-0 items-center justify-start space-x-2 rounded-md px-3.5 py-2.5 duration-200 hover:bg-neutral-700 ">
-            <FaRobot className="fill-white group-hover:fill-lime-400" />
-            <p className="flex-shrink-0 flex-grow-0 text-left text-sm font-medium text-white group-hover:text-lime-400">
+          <div
+            className="group relative flex select-none items-center justify-start space-x-2 rounded-md px-3.5 py-2.5 duration-200 "
+            title="Coming soon"
+          >
+            <FaRobot className="fill-neutral-400" />
+            <p className="flex-shrink-0 flex-grow-0 text-left text-sm font-medium text-neutral-400">
               More
             </p>
           </div>
