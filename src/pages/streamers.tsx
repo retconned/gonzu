@@ -1,8 +1,8 @@
 import { type NextPage } from "next";
 
-import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
-import ProfileComponent from "../components/ProfileComponent";
+import Footer from "@components/Footer";
+import NavBar from "@components/NavBar";
+import ProfileComponent from "@components/ProfileComponent";
 import { trpc } from "../utils/trpc";
 
 const Streamers: NextPage = () => {

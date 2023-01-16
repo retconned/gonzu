@@ -1,11 +1,12 @@
 import { type NextPage } from "next";
 
-import CategoryTitle from "../components/CategoryTitle";
-import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
+import CategoryTitle from "@components//CategoryTitle";
+import Footer from "@components//Footer";
+import NavBar from "@components//NavBar";
 // import ProfileComponent from "../components/ProfileComponent";
-import LoadoutThumbnailProfile from "../components/LoadoutThumbnailProfile";
-import LoadoutThumbnailWeapon from "../components/LoadoutThumbnailWeapon";
+import LoadoutThumbnailProfile from "@components/LoadoutThumbnailProfile";
+// import LoadoutThumbnailWeapon from "../components/LoadoutThumbnailWeapon";
+import LoadoutThumbnailWeapon from "@components/LoadoutThumbnailWeapon";
 import { trpc } from "../utils/trpc";
 
 const Loadouts: NextPage = () => {
