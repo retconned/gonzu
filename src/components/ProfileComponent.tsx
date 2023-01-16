@@ -54,7 +54,7 @@ const ProfileComponent = ({
           <Instagram instagram={instagram} />
         </div>
         <Link href={`${profileLink}`}>
-          <button className="mt-2 w-full rounded-md bg-lime-400 px-2 py-2 text-center font-medium text-neutral-900 duration-150 hover:bg-lime-500">
+          <button className="mt-2 w-full select-none rounded-md bg-lime-400 px-2 py-2 text-center font-medium text-neutral-900 duration-150 hover:bg-lime-500">
             View loadouts {">"}
           </button>
         </Link>

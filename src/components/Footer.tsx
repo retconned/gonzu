@@ -1,29 +1,17 @@
-import { FaDiscord, FaInstagram, FaTiktok, FaTwitter } from "react-icons/fa";
+import { Discord, Instagram, Tiktok, Twitter } from "./Socials";
 
 const Footer = () => {
   return (
-    <>
-      <div className="h-0.5 w-full bg-neutral-600" />
-      <div className="flex w-full flex-col items-center justify-center bg-neutral-800 py-3 px-10">
+    <div className="w-full">
+      {/* <div className="h-0.5 w-full bg-neutral-600" /> */}
+      <div className="flex flex-col items-center justify-center bg-neutral-800 py-3 px-10 last:w-full">
         <div className="flex flex-col items-center justify-center gap-2">
           <p className="font-medium text-neutral-400">Follow GONZU on</p>
           <div className="flex flex-row items-center justify-center space-x-4">
-            <FaTwitter
-              size={22}
-              className="fill-lime-400 duration-100 hover:fill-lime-600"
-            />
-            <FaTiktok
-              size={22}
-              className="fill-lime-400 duration-100 hover:fill-lime-600"
-            />
-            <FaDiscord
-              size={22}
-              className="fill-lime-400 duration-100 hover:fill-lime-600"
-            />
-            <FaInstagram
-              size={22}
-              className="fill-lime-400 duration-100 hover:fill-lime-600"
-            />
+            <Twitter twitter={"https://twitter.com/"} />
+            <Tiktok tiktok={"https://tiktok.com/@"} />
+            <Discord discord={"https://discord.gg/"} />
+            <Instagram instagram={"https://instagram.com/"} />
           </div>
           <div className="flex space-x-4 text-neutral-400">
             <a href="">
@@ -56,7 +44,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
