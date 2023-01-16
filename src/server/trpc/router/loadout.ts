@@ -125,4 +125,22 @@ export const loadoutRouter = router({
         },
       });
     }),
+
+  getLoadoutByIdForTrending: publicProcedure
+    .input(z.string())
+    .query(({ input, ctx }) => {
+      return ctx.prisma.loadout.findUnique({
+        where: {
+          id: input,
+        },
+        include: {
+          Weapon: {
+            select: {
+              image: true,
+              type: true,
+            },
+          },
+        },
+      });
+    }),
 });
