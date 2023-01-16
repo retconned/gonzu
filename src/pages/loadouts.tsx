@@ -38,7 +38,6 @@ const Loadouts: NextPage = () => {
       trpc.profile.getUnqiueProfile.useQuery(profileName);
 
     const profilePicture = profileData?.profile_image_url;
-    console.log(profilePicture);
     return profilePicture;
   };
 
