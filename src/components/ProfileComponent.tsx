@@ -2,11 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { profileShowcaseProps } from "../types/types";
 import InputType from "./InputType";
-import Instagram from "./Socials/Instagram";
-import Tiktok from "./Socials/Tiktok";
-import Twitch from "./Socials/Twitch";
-import Twitter from "./Socials/Twitter";
-import Youtube from "./Socials/Youtube";
+import { Instagram, Tiktok, Twitch, Twitter, Youtube } from "./Socials";
 
 const ProfileComponent = ({
   username,
