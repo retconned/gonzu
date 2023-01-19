@@ -3,20 +3,12 @@ import { type NextPage } from "next";
 import CategoryTitle from "@components//CategoryTitle";
 import Footer from "@components//Footer";
 import NavBar from "@components//NavBar";
-// import ProfileComponent from "../components/ProfileComponent";
 import LoadoutThumbnailProfile from "@components/LoadoutThumbnailProfile";
-// import LoadoutThumbnailWeapon from "../components/LoadoutThumbnailWeapon";
 import LoadoutThumbnailWeapon from "@components/LoadoutThumbnailWeapon";
 import { trpc } from "../utils/trpc";
 
 const Loadouts: NextPage = () => {
-  const trendingLoadouts: Array<string> = [
-    "clbjj1zff0006wyzyaq4iv1im",
-    "clbjj1zfr00chwyzy1nfyrcob",
-    "clbjj1zfq00c0wyzyy4px5r9m",
-    "clbjj1zfp009rwyzy5elcbh8g",
-    "clbjj1zfn006kwyzy5c4yzgy6",
-  ];
+  const trendingLoadouts: Array<string> = [];
   const trendingLoadoutsData = trendingLoadouts.map((loadoutId: string) => {
     const { data: trendingLoadoutsData } =
       trpc.loadout.getLoadoutByIdForTrending.useQuery(loadoutId);
@@ -48,7 +40,9 @@ const Loadouts: NextPage = () => {
         <div className="flex w-8/12 flex-col items-center justify-center gap-4">
           <CategoryTitle emoji="🌙" title="Trending Loadouts" />
           <div className="flex w-8/12 flex-col items-center gap-4 ">
-            {trendingLoadoutsData && trendingLoadoutsData != undefined
+            {trendingLoadouts.length !== 0 &&
+            trendingLoadoutsData &&
+            trendingLoadoutsData != undefined
               ? trendingLoadoutsData.map((loadout) => {
                   const profileName = getProfileName(
                     loadout?.loadoutName as string,
