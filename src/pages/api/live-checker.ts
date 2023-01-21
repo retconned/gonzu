@@ -2,25 +2,7 @@ import { type NextApiRequest, type NextApiResponse } from "next";
 
 import { env } from "../../env/server.mjs";
 import { prisma } from "../../server/db/client";
-// import { LiveStatus } from ".prisma/client";
-
-type twitchRespone = {
-  id: string;
-  user_id: string;
-  user_login: string;
-  user_name: string;
-  game_id: string;
-  game_name: string;
-  type: string;
-  title: string;
-  viewer_count: number;
-  started_at: string;
-  language: string;
-  thumbnail_url: string;
-  tag_ids: Array<string>;
-  tags: Array<string>;
-  is_mature: boolean;
-};
+import type { twitchResponeBody } from "../../types/types.js";
 
 const getTwitchAccessToken = async () => {
   const authUrl = `https://id.twitch.tv/oauth2/token?client_id=${env.TWITCH_CLIENT_ID}&client_secret=${env.TWITCH_CLIENT_SECRET}&grant_type=client_credentials`;
@@ -57,7 +39,7 @@ const buildUri = async (profiles: { channel: string }[]) => {
   return finalStringUrl;
 };
 
-const updateData = async (url: string) => {
+const getData = async (url: string) => {
   const liveChannels: Array<string> = [];
   const accessToken = await getTwitchAccessToken();
   if (accessToken) {
@@ -71,7 +53,7 @@ const updateData = async (url: string) => {
     if (json.data) {
       const { data } = json;
       console.log("fetched from twitch");
-      data.forEach(async (channel: twitchRespone) => {
+      data.forEach(async (channel: twitchResponeBody) => {
         const channelUrl = `https://www.twitch.tv/${channel.user_login}`;
         liveChannels.push(channelUrl);
       });
@@ -103,10 +85,11 @@ const TwitchStatusChecker = async (
   const profiles = await prisma.liveStatus.findMany();
   const url = await buildUri(profiles);
 
-  const liveChannels = await updateData(url);
+  const liveChannels = await getData(url);
   const offlineChannels = offlineChannelsData(profiles, liveChannels);
 
-  const updateOnlineChannels = liveChannels?.forEach(async (channel) => {
+  // this persists online channels to db
+  liveChannels?.forEach(async (channel) => {
     await prisma.liveStatus.update({
       where: {
         channel: channel,
@@ -118,7 +101,8 @@ const TwitchStatusChecker = async (
     console.log(`made ${channel} online`);
   });
 
-  const updateOfflineChannels = offlineChannels.forEach(async (channel) => {
+  // this persists offline channels to db
+  offlineChannels.forEach(async (channel) => {
     await prisma.liveStatus.update({
       where: {
         channel: channel,
@@ -127,12 +111,12 @@ const TwitchStatusChecker = async (
         is_live: false,
       },
     });
-    console.log(`made ${channel} online`);
+    console.log(`made ${channel} offline`);
   });
 
   await prisma.$disconnect();
 
-  res.status(200).json(`response aok 👍, ${liveChannels}`);
+  res.status(200).json(`Updated channel status 👍`);
 };
 
 export default TwitchStatusChecker;
