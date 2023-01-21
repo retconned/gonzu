@@ -95,17 +95,24 @@ model Loadout {
 }
 
 model Profile {
-  username          String   @unique()
+  username          String       @unique()
   profile_image_url String?
   loadouts          Json
-  twitch            String?
+  twitch            String?      @unique
   twitter           String?
   youtube           String?
   tiktok            String?
   instagram         String?
-  is_live           String?
-  is_streamer       Boolean  @default(true)
-  updatedAt         DateTime @updatedAt
-  language          String   @default("en")
+  is_streamer       Boolean      @default(true)
+  updatedAt         DateTime     @updatedAt
+  language          String       @default("en")
   input             String?
+  LiveStatus        LiveStatus[]
+}
+
+model LiveStatus {
+  channel   String   @unique @map("twitch")
+  Profile   Profile? @relation(fields: [channel], references: [twitch])
+  is_live   Boolean  @default(false)
+  updatedAt DateTime @updatedAt
 }

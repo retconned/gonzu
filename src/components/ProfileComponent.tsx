@@ -2,11 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { profileShowcaseProps } from "../types/types";
 import InputType from "./InputType";
-import Instagram from "./Socials/Instagram";
-import Tiktok from "./Socials/Tiktok";
-import Twitch from "./Socials/Twitch";
-import Twitter from "./Socials/Twitter";
-import Youtube from "./Socials/Youtube";
+import { Instagram, Tiktok, Twitch, Twitter, Youtube } from "./Socials";
 
 const ProfileComponent = ({
   username,
@@ -58,7 +54,7 @@ const ProfileComponent = ({
           <Instagram instagram={instagram} />
         </div>
         <Link href={`${profileLink}`}>
-          <button className="mt-2 w-full rounded-md bg-lime-400 px-2 py-2 text-center font-medium text-neutral-900 duration-150 hover:bg-lime-500">
+          <button className="mt-2 w-full select-none rounded-md bg-lime-400 px-2 py-2 text-center font-medium text-neutral-900 duration-150 hover:bg-lime-500">
             View loadouts {">"}
           </button>
         </Link>

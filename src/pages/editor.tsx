@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { FilteredATtachment } from "../components/LoadoutBuild";
-import TuneModal from "../components/TuneModal";
+import { FilteredATtachment } from "@components/LoadoutBuild";
+import TuneModal from "@components/TuneModal";
 import type {
   WeaponBuild,
   WeaponWithAttach,

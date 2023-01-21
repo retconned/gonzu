@@ -1,10 +1,10 @@
+import Footer from "@components/Footer";
+import LoadoutBuilder from "@components/LoadoutBuild";
+import NavBar from "@components/NavBar";
+import ProfileBuild from "@components/ProfileBuild";
+import ProfileUpdater from "@components/ProfileUpdate";
 import { type NextPage } from "next";
 import Head from "next/head";
-import Footer from "../components/Footer";
-import LoadoutBuilder from "../components/LoadoutBuild";
-import NavBar from "../components/NavBar";
-import ProfileBuild from "../components/ProfileBuild";
-import ProfileUpdater from "../components/ProfileUpdate";
 
 const Builder: NextPage = () => {
   return (

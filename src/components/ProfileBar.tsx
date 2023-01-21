@@ -1,10 +1,6 @@
 import Image from "next/image";
 import type { profileBarProps } from "../types/types";
-import Instagram from "./Socials/Instagram";
-import Tiktok from "./Socials/Tiktok";
-import Twitch from "./Socials/Twitch";
-import Twitter from "./Socials/Twitter";
-import Youtube from "./Socials/Youtube";
+import { Instagram, Tiktok, Twitch, Twitter, Youtube } from "./Socials";
 
 const ProfileBar = ({
   username,
