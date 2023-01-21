@@ -82,37 +82,101 @@ const TwitchStatusChecker = async (
   req: NextApiRequest,
   res: NextApiResponse,
 ) => {
+  console.log();
+
   const profiles = await prisma.liveStatus.findMany();
-  const url = await buildUri(profiles);
+  if (profiles.length <= 100) {
+    const profiles = await prisma.liveStatus.findMany();
+    const url = await buildUri(profiles);
+    const liveChannels = await getData(url);
+    const offlineChannels = offlineChannelsData(profiles, liveChannels);
 
-  const liveChannels = await getData(url);
-  const offlineChannels = offlineChannelsData(profiles, liveChannels);
-
-  // this persists online channels to db
-  liveChannels?.forEach(async (channel) => {
-    await prisma.liveStatus.update({
-      where: {
-        channel: channel,
-      },
-      data: {
-        is_live: true,
-      },
+    liveChannels.forEach(async (channel) => {
+      await prisma.liveStatus.update({
+        where: {
+          channel: channel,
+        },
+        data: {
+          is_live: true,
+        },
+      });
+      console.log(`made ${channel} online`);
     });
-    console.log(`made ${channel} online`);
-  });
 
-  // this persists offline channels to db
-  offlineChannels.forEach(async (channel) => {
-    await prisma.liveStatus.update({
-      where: {
-        channel: channel,
-      },
-      data: {
-        is_live: false,
-      },
+    offlineChannels.forEach(async (channel) => {
+      await prisma.liveStatus.update({
+        where: {
+          channel: channel,
+        },
+        data: {
+          is_live: false,
+        },
+      });
+      console.log(`made ${channel} offline`);
     });
-    console.log(`made ${channel} offline`);
-  });
+  } else if (profiles.length > 100) {
+    const profilesOver100 = await prisma.liveStatus.findMany({
+      skip: 100,
+    });
+    const profiles = await prisma.liveStatus.findMany();
+    const url = await buildUri(profiles);
+    const liveChannels = await getData(url);
+    const offlineChannels = offlineChannelsData(profiles, liveChannels);
+
+    liveChannels.forEach(async (channel) => {
+      await prisma.liveStatus.update({
+        where: {
+          channel: channel,
+        },
+        data: {
+          is_live: true,
+        },
+      });
+      console.log(`made ${channel} online`);
+    });
+
+    offlineChannels.forEach(async (channel) => {
+      await prisma.liveStatus.update({
+        where: {
+          channel: channel,
+        },
+        data: {
+          is_live: false,
+        },
+      });
+      console.log(`made ${channel} offline`);
+    });
+
+    // you go again for users 101-200
+
+    const urlOver100 = await buildUri(profilesOver100);
+    const liveChannelsOver100 = await getData(urlOver100);
+    const offlineChannelsOver100 = offlineChannelsData(profiles, liveChannels);
+
+    liveChannelsOver100?.forEach(async (channel) => {
+      await prisma.liveStatus.update({
+        where: {
+          channel: channel,
+        },
+        data: {
+          is_live: true,
+        },
+      });
+      console.log(`made ${channel} online`);
+    });
+
+    offlineChannelsOver100.forEach(async (channel) => {
+      await prisma.liveStatus.update({
+        where: {
+          channel: channel,
+        },
+        data: {
+          is_live: false,
+        },
+      });
+      console.log(`made ${channel} offline`);
+    });
+  }
 
   await prisma.$disconnect();
 
