@@ -30,19 +30,19 @@ const ProfileUpdater = () => {
               <input
                 className="form-input rounded-md bg-neutral-800 p-1 text-center placeholder-neutral-400 placeholder:text-center"
                 type="text"
-                placeholder="twitch"
+                placeholder="@twitch"
                 {...register("twitch", {})}
               />
               <input
                 className="form-input rounded-md bg-neutral-800 p-1 text-center placeholder-neutral-400 placeholder:text-center"
                 type="text"
-                placeholder="twitter"
+                placeholder="@twitter"
                 {...register("twitter", {})}
               />
               <input
                 className="rounded-md bg-neutral-800 p-1 text-center placeholder-neutral-400 placeholder:text-center"
                 type="text"
-                placeholder="youtube"
+                placeholder="youtube (url)"
                 {...register("youtube", {})}
               />
               <input

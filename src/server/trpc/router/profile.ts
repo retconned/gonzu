@@ -35,7 +35,7 @@ export const profileRouter = router({
         data: {
           username: input.username.toLowerCase(),
           loadouts: [],
-          twitch: `https://www.twitch.tv/${input.twitch}`,
+          twitch: `https://www.twitch.tv/${input.twitch?.toLowerCase()}`,
           twitter: `https://www.twitter.com/${input.twitter}`,
           youtube: input.youtube,
           tiktok: `https://www.tiktok.com/@${input.tiktok}`,
@@ -45,7 +45,7 @@ export const profileRouter = router({
           input: input.input,
           LiveStatus: {
             connect: {
-              channel: `https://www.twitch.tv/${input.twitch}`,
+              channel: `https://www.twitch.tv/${input.twitch?.toLowerCase()}`,
             },
           },
         },
@@ -71,7 +71,9 @@ export const profileRouter = router({
         },
         data: {
           twitch:
-            input.twitch != "" ? `https://www.twitch.tv/${input.twitch}` : null,
+            input.twitch != ""
+              ? `https://www.twitch.tv/${input.twitch?.toLowerCase()}`
+              : null,
           twitter:
             input.twitter != ""
               ? `https://www.twitter.com/${input.twitter}`
