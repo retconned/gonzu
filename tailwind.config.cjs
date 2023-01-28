@@ -7,6 +7,13 @@ module.exports = {
         "3xl": "2000px",
       },
     },
+    keyframes: {
+      shimmer: {
+        "100%": {
+          transform: "translateX(100%)",
+        },
+      },
+    },
   },
   plugins: [require("@tailwindcss/forms")],
 };
