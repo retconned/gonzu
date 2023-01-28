@@ -68,7 +68,9 @@ const Loadout: NextPage = () => {
             onClick={() => {
               router.back();
             }}
-            className="w-fit rounded-md px-3.5 py-2.5  text-left text-sm text-white duration-200 hover:bg-neutral-700 hover:text-lime-400"
+            className="w-fit rounded-md bg-neutral-400/20 px-3 py-2 text-center text-sm text-neutral-200 duration-150 hover:bg-neutral-400/40"
+
+            // className="w-fit rounded-md px-3.5 py-2.5  text-left text-sm text-white duration-200 hover:bg-neutral-700 hover:text-lime-400"
           >
             {"<  Go Back"}
           </button>

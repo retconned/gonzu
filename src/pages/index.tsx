@@ -15,7 +15,6 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex min-h-screen flex-col items-center  space-y-4 bg-neutral-900">
         <NavBar />
-
         <Footer />
       </main>
     </>
