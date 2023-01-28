@@ -21,6 +21,10 @@ const config = {
       },
       {
         protocol: "https",
+        hostname: "www.wzranked.com",
+      },
+      {
+        protocol: "https",
         hostname: "static-cdn.jtvnw.net",
       },
     ],

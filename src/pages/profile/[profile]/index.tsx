@@ -7,6 +7,8 @@ import Footer from "@components/Footer";
 import NavBar from "@components/NavBar";
 import ProfileBar from "@components/ProfileBar";
 import SmallerLoadout from "@components/SmallerLoadout";
+import SkelatonProfileBar from "@skeletons/SkeletonProfileBar";
+import SkeletonSmallerLoadout from "@skeletons/SkeletonSmallerLoadout";
 
 const Profile: NextPage = () => {
   const router = useRouter();
@@ -61,9 +63,8 @@ const Profile: NextPage = () => {
               instagram={profileData.instagram}
             />
           ) : (
-            <p>loading</p>
+            <SkelatonProfileBar />
           )}
-
           <div className="flex items-start justify-center md:min-h-[574px] 3xl:min-h-[934px]">
             <div className="grid grid-cols-4 gap-6">
               {profileLoadoutsData ? (
@@ -80,7 +81,7 @@ const Profile: NextPage = () => {
                   );
                 })
               ) : (
-                <p>loading</p>
+                <SkeletonSmallerLoadout />
               )}
             </div>
           </div>
