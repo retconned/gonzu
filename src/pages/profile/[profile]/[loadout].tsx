@@ -13,6 +13,8 @@ import Footer from "@components/Footer";
 import LoadoutModal from "@components/LoadoutModal";
 import NavBar from "@components/NavBar";
 import SmallerLoadout from "@components/SmallerLoadout";
+import SkeletonLoadoutModal from "@components/skeletons/SkeletonLoadoutModal";
+import SkeletonSmallerLoadout from "@skeletons/SkeletonSmallerLoadout";
 const Loadout: NextPage = () => {
   const router = useRouter();
   const loadoutId = router.query.loadout;
@@ -71,14 +73,21 @@ const Loadout: NextPage = () => {
             {"<  Go Back"}
           </button>
         </div>
-        <LoadoutModal
-          imageSrc={getLoadout.data?.Weapon.image as string}
-          loadoutName={getLoadout.data?.loadoutName as string}
-          lastUpdated={getLoadout.data?.updatedAt}
-          attachments={
-            getLoadout.data?.attachments as unknown as Array<LoadoutAttachments>
-          }
-        />
+        <div className="flex flex-row">
+          {getLoadout ? (
+            <LoadoutModal
+              imageSrc={getLoadout.data?.Weapon.image as string}
+              loadoutName={getLoadout.data?.loadoutName as string}
+              lastUpdated={getLoadout.data?.updatedAt}
+              attachments={
+                getLoadout.data
+                  ?.attachments as unknown as Array<LoadoutAttachments>
+              }
+            />
+          ) : (
+            <SkeletonLoadoutModal />
+          )}
+        </div>
         <CategoryTitle emoji="🔥" title={`Other builds by ${profile}`} />
         <div className="flex w-8/12 items-center justify-center">
           <div className="grid grid-cols-4 gap-6">
@@ -96,7 +105,7 @@ const Loadout: NextPage = () => {
                 );
               })
             ) : (
-              <p>loading</p>
+              <SkeletonSmallerLoadout />
             )}
           </div>
         </div>

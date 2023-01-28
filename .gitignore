@@ -47,3 +47,6 @@ data/attachments.json
 data/loadouts.json
 data/LOADOUTS_RAW.json
 prisma/loadout/rawFetch.ts
+prisma/loadout/seedLoadouts.ts
+data/loadouts_1.json
+data/LOADOUTS_RAW_1.json
