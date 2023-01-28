@@ -6,10 +6,11 @@
   "homepage": "https://github.com/retconned/gonzu",
   "engines": {
     "node": ">=14.0.0",
-    "yarn": ">=1.22.0",
-    "npm": "please-use-yarn"
+    "yarn": "please-use-pnpm",
+    "npm": "please-use-pnpm"
   },
   "scripts": {
+    "preinstall": "npx only-allow pnpm", 
     "build": "next build",
     "dev": "next dev",
     "postinstall": "prisma generate",
