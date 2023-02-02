@@ -10,9 +10,10 @@
     "npm": "please-use-pnpm"
   },
   "scripts": {
-    "preinstall": "npx only-allow pnpm", 
+    "preinstall": "npx only-allow pnpm",
     "build": "next build",
     "dev": "next dev",
+    "dev:local": "docker start gonzu-local && next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
