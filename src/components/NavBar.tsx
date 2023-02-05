@@ -5,7 +5,9 @@ const NavBar = () => {
   return (
     <>
       <div className="flex w-full items-center justify-between bg-neutral-800 py-3 px-10">
-        <p className="text-left text-xl font-bold text-white">WZ Ranked</p>
+        <Link href={"/"}>
+          <p className="text-left text-xl font-bold text-white">GONZU</p>
+        </Link>
         <div className="flex items-center justify-center gap-[30px] ">
           <Link href={"/loadouts"}>
             <div className="group flex flex-shrink-0 flex-grow-0 items-center justify-start space-x-2 rounded-md px-3.5 py-2.5 duration-100 hover:bg-neutral-700 ">

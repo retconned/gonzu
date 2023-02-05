@@ -43,11 +43,11 @@ export const profileRouter = router({
           is_streamer: input.is_streamer,
           language: input.language,
           input: input.input,
-          LiveStatus: {
-            connect: {
-              channel: `https://www.twitch.tv/${input.twitch?.toLowerCase()}`,
-            },
-          },
+          // LiveStatus: {
+          //   connect: {
+          //     channel: `https://www.twitch.tv/${input.twitch?.toLowerCase()}`,
+          //   },
+          // },
         },
       });
     }),
