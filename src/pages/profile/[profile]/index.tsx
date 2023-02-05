@@ -82,7 +82,7 @@ const Profile: NextPage = () => {
           </div>
           <FilterBar setQuery={setQuery} />
           <div className="flex items-start justify-center md:min-h-[574px] 3xl:min-h-[934px]">
-            <div className="grid grid-cols-4 gap-6">
+            <div className="grid gap-6 md:grid-cols-4">
               {profileLoadoutsFiltered ? (
                 profileLoadoutsFiltered.map((loadout) => {
                   return (

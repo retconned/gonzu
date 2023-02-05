@@ -5,14 +5,14 @@ import { FaBoxes, FaRobot, FaUserFriends } from "react-icons/fa";
 import { HiOutlineMenu } from "react-icons/hi";
 
 const NavBar = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   return (
     <>
       <div className="flex w-full items-center justify-between bg-neutral-800 py-3 px-10 ">
         <Link href={"/"}>
           <p className="text-left text-xl font-bold text-white">GONZU</p>
         </Link>
-        <div className="hidden items-center justify-center gap-[30px] bg-red-500/20 md:flex">
+        <div className="hidden items-center justify-center gap-[30px] md:flex">
           <Link href={"/loadouts"}>
             <div className="group flex flex-shrink-0 flex-grow-0 items-center justify-start space-x-2 rounded-md px-3.5 py-2.5 duration-100 hover:bg-neutral-700 ">
               <FaBoxes className="fill-white group-hover:fill-lime-400" />

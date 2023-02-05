@@ -92,7 +92,7 @@ const Loadout: NextPage = () => {
         </div>
         <CategoryTitle emoji="🔥" title={`Other builds by ${profile}`} />
         <div className="flex w-8/12 items-center justify-center">
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid gap-6 sm:grid-cols-4">
             {profileLoadoutsData ? (
               profileLoadoutsData.slice(0, 6).map((loadout) => {
                 return (
