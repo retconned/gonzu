@@ -17,6 +17,7 @@ const ProfileBar = ({
         <div className=" flex items-center gap-4 text-neutral-200 ">
           {imageSrc != null && imageSrc != "" ? (
             <Image
+              draggable={"false"}
               src={imageSrc}
               alt={`${username}'s profile picture`}
               width={30}

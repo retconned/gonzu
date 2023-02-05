@@ -23,6 +23,7 @@ const ProfileComponent = ({
           <div className="outline-5 outline-offset-2 outline-red-600">
             {imageSrc != null ? (
               <Image
+                draggable={"false"}
                 src={imageSrc}
                 alt={`${username}'s thumbnail image`}
                 width={292.5}
