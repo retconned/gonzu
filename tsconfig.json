@@ -18,6 +18,7 @@
     "paths": {
       "@components/*": ["./src/components/*"],
       "@skeletons/*": ["./src/components/skeletons/*"],
+      "@ui/*": ["./src/components/ui/*"],
       "@/*": ["./*"]
     }
   },

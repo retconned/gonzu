@@ -4,9 +4,8 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import type { ReactNode } from "react";
+import { cn } from "../utils/cn";
 
-// import { GiPistolGun } from "react-icons/gi";
-// import { useEffect, useState } from "react";
 // import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
@@ -97,9 +96,9 @@ const Home: NextPage = () => {
                   profilePicture: "google.com",
                   live: false,
                 },
-              ].map((profile) => {
+              ].map((profile, i) => {
                 return (
-                  <div key={profile.name}>
+                  <div key={i}>
                     <div className="h-20 w-20 rounded-full bg-green-300">
                       {profile.live ? (
                         <div className="relative top-[56px] left-[64px] h-4 w-4 rounded-full bg-red-600" />
@@ -120,7 +119,7 @@ const Home: NextPage = () => {
               title="community loadouts"
               line="Get started in a minutes"
               explanation={`create profile > create ur loadout > share it with the world`}
-              mode="light"
+              intent="light"
             />
           </div>
           <div className="flex w-full flex-col items-center justify-center bg-neutral-400 py-8 sm:py-0">
@@ -128,34 +127,10 @@ const Home: NextPage = () => {
               title="streamers loadouts"
               line={`find you favorite streamer's loadout, find a loadout`}
               explanation={`browse the best loadout for your gun in our loadouts section`}
-              mode="dark"
+              intent="dark"
             />
           </div>
         </div>
-        {/* <div className="flex h-[600px] w-full flex-row justify-center bg-neutral-900 py-12">
-          <div className="grid grid-cols-2 gap-4">
-            <FeatureComponent
-              icon={<BsClockFill className="fill-lime-400 duration-200" />}
-              title="up to date loadouts"
-              description="The most up-to-date loadouts from popular twitch streamers, youtubers and community members."
-            />
-            <FeatureComponent
-              icon={<BsStars className="fill-lime-400 duration-200" />}
-              title="СLEAN INTERFACE"
-              description="Simple and clear interface. All information is available at your fingertips in a couple of clicks."
-            />
-            <FeatureComponent
-              icon={<BsFillPeopleFill className="fill-lime-400 duration-200" />}
-              title="community based"
-              description="Gonzu is part of an ecosystem of platforms dedicated to Call of Duty Warzone."
-            />
-            <FeatureComponent
-              icon={<FaGlobeAfrica className="fill-lime-400 duration-200" />}
-              title="Multi-region"
-              description="we support all regions and servers and support so you can find what fits your region meta. "
-            />
-          </div>
-        </div> */}
         <Footer />
       </main>
     </>
@@ -168,32 +143,40 @@ const SetupComponent = ({
   title,
   line,
   explanation,
-  mode,
+  intent,
 }: {
   title: string;
   line: string;
   explanation: string;
-  mode: "light" | "dark";
+  intent: "light" | "dark";
 }) => {
   return (
     <div
-      className={
-        mode === "light"
-          ? "flex w-8/12 flex-col items-center rounded-md bg-neutral-400 py-20 text-white"
-          : "flex w-8/12 flex-col items-center rounded-md bg-neutral-700 py-20 text-white"
-      }
+      className={cn(
+        "flex w-8/12 flex-col items-center rounded-md py-20 text-white",
+        {
+          "bg-neutral-400": intent === "light",
+          "bg-neutral-700": intent === "dark",
+        },
+      )}
     >
       <p className="text-xl font-bold text-lime-400">{title}</p>
-      {mode === "light" ? (
-        <p className="text-neutral-900">{line}</p>
-      ) : (
-        <p className="text-neutral-100">{line}</p>
-      )}
-      {mode === "light" ? (
-        <p className="text-neutral-900">{explanation}</p>
-      ) : (
-        <p className="text-neutral-100">{explanation}</p>
-      )}
+      <p
+        className={cn({
+          "text-neutral-900": intent === "light",
+          "text-neutral-100": intent === "dark",
+        })}
+      >
+        {line}
+      </p>
+      <p
+        className={cn({
+          "text-neutral-900": intent === "light",
+          "text-neutral-100": intent === "dark",
+        })}
+      >
+        {explanation}
+      </p>
     </div>
   );
 };

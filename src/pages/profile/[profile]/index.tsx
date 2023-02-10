@@ -10,6 +10,7 @@ import ProfileBar from "@components/ProfileBar";
 import SmallerLoadout from "@components/SmallerLoadout";
 import SkelatonProfileBar from "@skeletons/SkeletonProfileBar";
 import SkeletonSmallerLoadout from "@skeletons/SkeletonSmallerLoadout";
+import { Button } from "@ui/Button";
 
 const Profile: NextPage = () => {
   const router = useRouter();
@@ -49,15 +50,14 @@ const Profile: NextPage = () => {
       <NavBar />
       <div className="flex w-8/12 flex-col items-center justify-center pt-4">
         <div className="w-full">
-          <button
+          <Button
+            intent={"solid-grey"}
             onClick={() => {
               router.back();
             }}
-            className="w-fit rounded-md bg-neutral-400/20 px-3 py-2 text-center text-sm text-neutral-200 duration-150 hover:bg-neutral-400/40"
-            // className="-mb-4 w-fit rounded-md px-3.5 py-2.5 text-left text-sm text-white duration-200 hover:bg-neutral-700 hover:text-lime-400"
           >
             {"<  Go Back"}
-          </button>
+          </Button>
         </div>
         <div className="flex w-full flex-col items-center justify-between gap-y-4 py-6">
           <div className="w-full">

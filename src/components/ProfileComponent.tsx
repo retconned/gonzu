@@ -1,3 +1,4 @@
+import { Button } from "@ui/Button";
 import Image from "next/image";
 import Link from "next/link";
 import type { profileShowcaseProps } from "../types/types";
@@ -55,9 +56,9 @@ const ProfileComponent = ({
           <Instagram instagram={instagram} />
         </div>
         <Link href={`${profileLink}`}>
-          <button className="mt-2 w-full select-none rounded-md bg-lime-400 px-2 py-2 text-center font-medium text-neutral-900 duration-150 hover:bg-lime-500">
+          <Button className="mt-2" intent={"fill"}>
             View loadouts {">"}
-          </button>
+          </Button>
         </Link>
       </div>
     </>
