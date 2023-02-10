@@ -4,8 +4,24 @@ import { AiFillHome } from "react-icons/ai";
 import { FaBoxes, FaRobot, FaUserFriends } from "react-icons/fa";
 import { HiOutlineMenu } from "react-icons/hi";
 
+import { signIn, signOut, useSession } from "next-auth/react";
+import { trpc } from "../utils/trpc";
+
 const NavBar = () => {
   const [open, setOpen] = useState(false);
+
+  const { data: sessionData } = useSession();
+
+  const callbackUrl = "/";
+
+  const { data: secretMessage } = trpc.example.getSecretMessage.useQuery(
+    undefined, // no input
+    { enabled: sessionData?.user !== undefined },
+  );
+
+  console.log("secret: ", secretMessage);
+  console.log("session: ", sessionData);
+
   return (
     <>
       <div className="flex w-full items-center justify-between bg-neutral-800 py-3 px-10 ">
@@ -29,7 +45,6 @@ const NavBar = () => {
               </p>
             </div>
           </Link>
-
           <div
             className="group relative flex select-none items-center justify-start space-x-2 rounded-md px-3.5 py-2.5 duration-200 "
             title="Coming soon"
@@ -40,8 +55,18 @@ const NavBar = () => {
             </p>
           </div>
         </div>
-        <div>
-          <div className="block md:hidden">
+        <button
+          className="hidden rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20 sm:block"
+          onClick={
+            sessionData
+              ? () => void signOut()
+              : () => void signIn("twitch", { callbackUrl })
+          }
+        >
+          {sessionData ? "Sign out" : "Sign in"}
+        </button>
+        <div className="block md:hidden">
+          <div>
             <button
               className="rounded-md bg-neutral-700 p-1"
               onClick={() => {
@@ -79,6 +104,16 @@ const NavBar = () => {
                       </p>
                     </div>
                   </Link>
+                  <button
+                    className="block rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20 sm:hidden"
+                    onClick={
+                      sessionData
+                        ? () => void signOut()
+                        : () => void signIn("twitch", { callbackUrl })
+                    }
+                  >
+                    {sessionData ? "Sign out" : "Sign in"}
+                  </button>
                 </div>
               </div>
             ) : (

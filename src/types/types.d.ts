@@ -99,6 +99,10 @@ type ProfileInput = {
   input: string;
 };
 
+interface ProfileInputOnboarding extends ProfileInput {
+  profile_image_url: string;
+}
+
 type WeaponWithAttach = {
   name: string;
   brand: string;
