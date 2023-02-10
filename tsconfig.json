@@ -17,7 +17,8 @@
     "noUncheckedIndexedAccess": true,
     "paths": {
       "@components/*": ["./src/components/*"],
-      "@skeletons/*": ["./src/components/skeletons/*"]
+      "@skeletons/*": ["./src/components/skeletons/*"],
+      "@/*": ["./*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
