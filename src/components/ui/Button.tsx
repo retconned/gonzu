@@ -13,7 +13,8 @@ const button = cva(
         "solid-grey":
           "w-28 bg-neutral-800 border border-neutral-700 text-sm text-neutral-200 hover:bg-neutral-400/40",
         navigation:
-          "group flex flex-shrink-0 flex-grow-0 items-center justify-start space-x-2 rounded-md px-3.5 py-2.5 duration-100 hover:bg-neutral-700",
+          "flex items-center justify-start space-x-2 rounded-md px-3.5 py-2.5 hover:bg-neutral-700",
+        transparent: "text-neutral-100 ",
       },
     },
     compoundVariants: [{ intent: "fill", className: "uppercase" }],

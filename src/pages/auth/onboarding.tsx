@@ -4,8 +4,11 @@ import { useForm } from "react-hook-form";
 import Footer from "@components/Footer";
 import NavBar from "@components/NavBar";
 import { useSession } from "next-auth/react";
+import Router from "next/router";
 import type { ProfileInputOnboarding } from "../../types/types";
 import { trpc } from "../../utils/trpc";
+
+// import { Router } from "next/router";
 
 const OnBoarding = () => {
   const { data: sessionData } = useSession();
@@ -34,9 +37,15 @@ const ProfileOnBoarder = ({ sessionData }: any) => {
     data.username = sessionData.user?.name.toLowerCase();
     data.twitch = sessionData.user?.name.toLowerCase();
     data.profile_image_url = sessionData.user?.image;
+
+    setTimeout(() => {
+      Router.push("/");
+    }, 500);
   };
+
   const { mutate: profileCreate } =
     trpc.profile.createProfileOnboarding.useMutation();
+
   return (
     <>
       <main className="flex flex-col items-start justify-start px-20">
@@ -87,12 +96,14 @@ const ProfileOnBoarder = ({ sessionData }: any) => {
                 placeholder="tiktok"
                 {...register("tiktok", {})}
               />
+              <label>Instagram</label>
               <input
                 className="form-input rounded-md bg-neutral-800 p-1 text-center placeholder-neutral-400 placeholder:text-center"
                 type="text"
                 placeholder="instagram"
                 {...register("instagram", {})}
               />
+              <label>Are you a streamer?</label>
               <select
                 className="form-select rounded-md bg-neutral-800 p-1 text-center placeholder:text-center"
                 {...register("is_streamer", {
