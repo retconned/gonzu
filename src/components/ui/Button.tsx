@@ -7,14 +7,14 @@ const button = cva(
   {
     variants: {
       intent: {
-        fill: "w-full bg-lime-400 text-neutral-900 hover:bg-lime-500",
+        fill: "w-full text-sm bg-lime-400 text-neutral-900 hover:bg-lime-500",
         outline:
           "w-full border border-lime-400 text-lime-400 hover:bg-lime-400 hover:text-white",
         "solid-grey":
           "w-28 bg-neutral-800 border border-neutral-700 text-sm text-neutral-200 hover:bg-neutral-400/40",
         navigation:
           "flex items-center justify-start space-x-2 rounded-md px-3.5 py-2.5 hover:bg-neutral-700",
-        transparent: "text-neutral-100 ",
+        transparent: "text-neutral-100 w-full hover:text-neutral-200 ",
       },
     },
     compoundVariants: [{ intent: "fill", className: "uppercase" }],

@@ -49,8 +49,8 @@ const ProfileOnBoarder = ({ sessionData }: any) => {
   return (
     <div className="items-cent flex w-full flex-col justify-center">
       <main className="flex flex-col items-center justify-center">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 text-center ">
-          <h1 className=" text-2xl font-extrabold text-white">
+        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 text-center">
+          <h1 className="text-2xl font-extrabold text-white">
             {"You're almost there"}
           </h1>
           <div>

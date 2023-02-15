@@ -26,7 +26,7 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="flex w-full items-center justify-between bg-neutral-800 py-3 px-10 ">
+      <div className="flex w-full items-center justify-between bg-neutral-800 py-3 px-10">
         <Link href={"/"}>
           <p className="text-left text-xl font-bold text-white">GONZU</p>
         </Link>
@@ -44,7 +44,7 @@ const NavBar = () => {
             routeLink="/streamers"
           />
           <div
-            className="group relative flex select-none items-center justify-start space-x-2 rounded-md px-3.5 py-2.5 duration-200 "
+            className="group relative flex select-none items-center justify-start space-x-2 rounded-md px-3.5 py-2.5 duration-200"
             title="Coming soon"
           >
             <FaRobot className="fill-neutral-400" />
@@ -138,15 +138,15 @@ const AuthModal = ({
               }}
               width={36}
               height={36}
-              className="h-9 w-9 cursor-pointer overflow-hidden rounded-full border-2 border-lime-400 duration-200 hover:border-lime-700 "
-              alt="profile picture "
+              className="h-9 w-9 cursor-pointer overflow-hidden rounded-full border-2 border-lime-400 duration-200 hover:border-lime-700"
+              alt="profile picture"
             />
           ) : (
             <div className="h-9 w-9 rounded-full bg-blue-500" />
           )}
 
           {profileModal ? (
-            <div className="absolute top-16 right-5 rounded-md border border-neutral-500/30 bg-neutral-800 p-4 shadow-xl">
+            <div className="absolute top-[76px] right-5 rounded-md border border-neutral-500/30 bg-neutral-800 p-4 shadow-xl">
               <div className="flex flex-col gap-4">
                 <Link
                   href={`/profile/${sessionData.user?.name?.toLowerCase()}`}
@@ -184,7 +184,7 @@ const NavButton = ({
     <Link href={routeLink}>
       <Button
         intent={"navigation"}
-        className="group flex flex-shrink-0 flex-grow-0 items-center justify-start space-x-2 rounded-md px-3.5 py-2.5 duration-100 hover:bg-neutral-700 "
+        className="group flex flex-shrink-0 flex-grow-0 items-center justify-start space-x-2 rounded-md px-3.5 py-2.5 duration-100 hover:bg-neutral-700"
       >
         {icon}
         <p className="text-white group-hover:text-lime-400">{title}</p>
