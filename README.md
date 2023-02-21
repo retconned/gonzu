@@ -1,8 +1,8 @@
-# 📦 Gonzu - Call of Duty loadouts 
+# 📦 Gonzu - Call of Duty loadouts
 
-## **What is Kingyo ?**
+## **What is Gonzu ?**
+
 Gunzo is a Call of Duty Warzone 2.0 loadouts data aggregator built using the [T3 Stack](https://create.t3.gg/) ([Next.js](https://nextjs.org) , [NextAuth.js](https://next-auth.js.org), [Prisma](https://prisma.io), [Tailwind CSS](https://tailwindcss.com),[ tRPC](https://trpc.io))
-
 
 # Installation
 
@@ -18,7 +18,7 @@ Gunzo is a Call of Duty Warzone 2.0 loadouts data aggregator built using the [T3
    cd gonzu
    ```
 
-3. Boot up local or a remote MySQL Database 
+3. Boot up local or a remote MySQL Database
 
 4. Edit the `.env.example` to `.env` and add your tokens & API Keys needed & correct DB url
 
@@ -28,19 +28,15 @@ Gunzo is a Call of Duty Warzone 2.0 loadouts data aggregator built using the [T3
    pnpm install
    ```
 
-
 6. Run the app locally
 
    ```sh
-   yarn dev
+   pnpm dev
    ```
-
-
 
 ## What's next? How do I make an app with this?
 
 We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
-
 
 # Learn More about T3
 
