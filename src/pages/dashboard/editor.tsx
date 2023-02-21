@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 
+import Footer from "@components/Footer";
 import { FilteredATtachment } from "@components/LoadoutBuild";
+import NavBar from "@components/NavBar";
 import TuneModal from "@components/TuneModal";
+import Link from "next/link";
 import type {
   WeaponBuild,
   WeaponWithAttach,
   buildAttachments,
-} from "../types/types";
-import { trpc } from "../utils/trpc";
+} from "../../types/types";
+import { trpc } from "../../utils/trpc";
 
 const LoadoutEditor = () => {
   const [weapon, setWeapon] = useState<string>("");
@@ -119,7 +122,13 @@ const LoadoutEditor = () => {
 
   return (
     <>
+      <Link href={"/dashboard"}>
+        <button className="absolute top-20 left-10 w-fit rounded-md bg-neutral-400/20 px-3 py-2 text-center text-sm text-neutral-200 duration-150 hover:bg-neutral-400/40">
+          {"<"} go back
+        </button>
+      </Link>
       <main className="flex min-h-screen  flex-col items-center justify-center bg-neutral-900">
+        <NavBar />
         {tuneModalVisibility && (
           <TuneModal
             setVisibility={setTuneModalVisibility}
@@ -247,6 +256,7 @@ const LoadoutEditor = () => {
             </p>
           )}
         </div>
+        <Footer />
       </main>
     </>
   );

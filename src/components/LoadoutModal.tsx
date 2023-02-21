@@ -39,7 +39,7 @@ const LoadoutModal = ({
             <div className="col-span-2 flex items-center justify-center">
               <AttachmentComponent
                 slot={attachments[1]?.slot as Slot}
-                name={attachments[1]?.name as string}
+                name={attachments[1]?.name.toString() as string}
                 horizontalTune={attachments[1]?.horizontalTune}
                 verticalTune={attachments[1]?.verticalTune}
               />

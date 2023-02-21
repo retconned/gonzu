@@ -1,4 +1,5 @@
 // import Image from "next/image";
+import { Button } from "@ui/Button";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -56,9 +57,7 @@ const LoadoutThumbnailProfile = ({
               </div>
             </div>
             <Link href={`${loadoutLink}`}>
-              <button className="w-full select-none rounded-md border border-lime-400 px-2 py-2 text-center text-lime-400 duration-150 hover:bg-lime-400 hover:text-white">
-                View build {">"}
-              </button>
+              <Button intent={"outline"}>View build {">"}</Button>
             </Link>
           </div>
         </div>

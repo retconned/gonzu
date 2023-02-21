@@ -15,6 +15,7 @@ import NavBar from "@components/NavBar";
 import SmallerLoadout from "@components/SmallerLoadout";
 import SkeletonLoadoutModal from "@components/skeletons/SkeletonLoadoutModal";
 import SkeletonSmallerLoadout from "@skeletons/SkeletonSmallerLoadout";
+import { Button } from "@ui/Button";
 const Loadout: NextPage = () => {
   const router = useRouter();
   const loadoutId = router.query.loadout;
@@ -64,16 +65,14 @@ const Loadout: NextPage = () => {
       <NavBar />
       <div className="flex w-full flex-col items-center justify-between gap-y-4  py-6">
         <div className="w-8/12 px-4 text-neutral-200">
-          <button
+          <Button
+            intent={"solid-grey"}
             onClick={() => {
               router.back();
             }}
-            className="w-fit rounded-md bg-neutral-400/20 px-3 py-2 text-center text-sm text-neutral-200 duration-150 hover:bg-neutral-400/40"
-
-            // className="w-fit rounded-md px-3.5 py-2.5  text-left text-sm text-white duration-200 hover:bg-neutral-700 hover:text-lime-400"
           >
             {"<  Go Back"}
-          </button>
+          </Button>
         </div>
         <div className="flex flex-row">
           {getLoadout ? (
@@ -92,7 +91,7 @@ const Loadout: NextPage = () => {
         </div>
         <CategoryTitle emoji="🔥" title={`Other builds by ${profile}`} />
         <div className="flex w-8/12 items-center justify-center">
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid gap-6 sm:grid-cols-4">
             {profileLoadoutsData ? (
               profileLoadoutsData.slice(0, 6).map((loadout) => {
                 return (

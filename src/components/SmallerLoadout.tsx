@@ -18,6 +18,7 @@ const SmallerLoadout = ({
     <>
       <div className="flex max-w-sm flex-col items-center justify-center space-y-2 rounded-md border border-neutral-700 bg-neutral-800 p-4">
         <Image
+          draggable={"false"}
           src={imageSrc}
           alt={`${weaponBody}'s thumbnail image`}
           width={292.5}

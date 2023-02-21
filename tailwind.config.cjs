@@ -6,6 +6,9 @@ module.exports = {
       screens: {
         "3xl": "2000px",
       },
+      scale: {
+        flip: "-1",
+      },
     },
     keyframes: {
       shimmer: {
