@@ -2,7 +2,11 @@
 
 ## **What is Gonzu ?**
 
-Gunzo is a Call of Duty Warzone 2.0 loadouts data aggregator built using the [T3 Stack](https://create.t3.gg/) ([Next.js](https://nextjs.org) , [NextAuth.js](https://next-auth.js.org), [Prisma](https://prisma.io), [Tailwind CSS](https://tailwindcss.com),[ tRPC](https://trpc.io))
+Gonzu is a Call of Duty Warzone 2.0 loadouts data aggregator built using the [T3 Stack](https://create.t3.gg/) ([Next.js](https://nextjs.org) , [NextAuth.js](https://next-auth.js.org), [Prisma](https://prisma.io), [Tailwind CSS](https://tailwindcss.com),[ tRPC](https://trpc.io))
+
+# Preview
+
+![preview of the website](https://i.imgur.com/KiIGl5Q.gif)
 
 # Installation
 
