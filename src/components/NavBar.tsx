@@ -8,7 +8,7 @@ import { HiOutlineMenu } from "react-icons/hi";
 
 import { Button } from "@ui/Button";
 import type { Session } from "next-auth/core/types";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 
 const NavBar = () => {
@@ -163,9 +163,7 @@ const AuthModal = ({
           )}
         </div>
       ) : (
-        <Button onClick={() => signIn("twitch", { callbackUrl })} intent="fill">
-          Sign in
-        </Button>
+        <Button intent="fill-disabled">Sign in</Button>
       )}
     </div>
   );
