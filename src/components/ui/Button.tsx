@@ -8,8 +8,12 @@ const button = cva(
     variants: {
       intent: {
         fill: "w-full text-sm bg-lime-400 text-neutral-900 hover:bg-lime-500",
+        "fill-disabled":
+          "w-full text-sm bg-neutral-500 text-neutral-900 hover:bg-neutral-500 pointer-events-none uppercase",
         outline:
           "w-full border border-lime-400 text-lime-400 hover:bg-lime-400 hover:text-white",
+        "outline-disabled":
+          "w-full border border-neutral-400 text-neutral-400 pointer-events-none",
         "solid-grey":
           "w-28 bg-neutral-800 border border-neutral-700 text-sm text-neutral-200 hover:bg-neutral-400/40",
         navigation:
@@ -17,6 +21,7 @@ const button = cva(
         transparent: "text-neutral-100 w-full hover:text-neutral-200 ",
       },
     },
+
     compoundVariants: [{ intent: "fill", className: "uppercase" }],
     defaultVariants: {
       intent: "fill",

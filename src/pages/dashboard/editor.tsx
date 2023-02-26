@@ -4,6 +4,7 @@ import Footer from "@components/Footer";
 import { FilteredATtachment } from "@components/LoadoutBuild";
 import NavBar from "@components/NavBar";
 import TuneModal from "@components/TuneModal";
+import Head from "next/head";
 import Link from "next/link";
 import type {
   WeaponBuild,
@@ -122,142 +123,149 @@ const LoadoutEditor = () => {
 
   return (
     <>
-      <Link href={"/dashboard"}>
-        <button className="absolute top-20 left-10 w-fit rounded-md bg-neutral-400/20 px-3 py-2 text-center text-sm text-neutral-200 duration-150 hover:bg-neutral-400/40">
-          {"<"} go back
-        </button>
-      </Link>
-      <main className="flex min-h-screen  flex-col items-center justify-center bg-neutral-900">
-        <NavBar />
-        {tuneModalVisibility && (
-          <TuneModal
-            setVisibility={setTuneModalVisibility}
-            handleAttachmentAddition={handleAttachmentAddition}
-          />
-        )}
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            Update loadout
-          </h1>
-          <div className="flex w-full flex-col items-center justify-center gap-2 text-white">
-            <p className="mb-4 text-center text-2xl font-bold text-white">
-              Select a profile:
-            </p>
-            <div className="">
-              {selectedProfile ? (
-                <p className="mb-4 text-neutral-400">
-                  Selected profile:{" "}
-                  <span className="font-bold text-white">
-                    {selectedProfile}
-                  </span>
-                </p>
-              ) : (
-                ""
-              )}
+      <Head>
+        <title>Gunzo - get geared</title>
+        <meta name="description" content="Gunzo - get geared" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <>
+        <Link href={"/dashboard"}>
+          <button className="absolute top-20 left-10 w-fit rounded-md bg-neutral-400/20 px-3 py-2 text-center text-sm text-neutral-200 duration-150 hover:bg-neutral-400/40">
+            {"<"} go back
+          </button>
+        </Link>
+        <main className="flex min-h-screen  flex-col items-center justify-center bg-neutral-900">
+          <NavBar />
+          {tuneModalVisibility && (
+            <TuneModal
+              setVisibility={setTuneModalVisibility}
+              handleAttachmentAddition={handleAttachmentAddition}
+            />
+          )}
+          <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
+            <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-[5rem]">
+              Update loadout
+            </h1>
+            <div className="flex w-full flex-col items-center justify-center gap-2 text-white">
+              <p className="mb-4 text-center text-2xl font-bold text-white">
+                Select a profile:
+              </p>
+              <div className="">
+                {selectedProfile ? (
+                  <p className="mb-4 text-neutral-400">
+                    Selected profile:{" "}
+                    <span className="font-bold text-white">
+                      {selectedProfile}
+                    </span>
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="grid w-full grid-cols-6 items-center gap-4">
+                {profileNames?.map((profileName, i) => {
+                  return (
+                    <button
+                      className="w-full rounded-md bg-neutral-800 px-2 py-2 text-center duration-150 hover:bg-neutral-700"
+                      key={i}
+                      onClick={() => {
+                        setSelectedProfile(profileName.username);
+                      }}
+                    >
+                      {profileName.username}
+                    </button>
+                  );
+                })}
+              </div>
+              <div></div>
             </div>
-            <div className="grid w-full grid-cols-6 items-center gap-4">
-              {profileNames?.map((profileName, i) => {
+            <button
+              className="w-fit rounded-md bg-red-500 p-2 font-bold text-white duration-150 hover:bg-red-700"
+              onClick={handleGetLoadouts}
+            >
+              Get {selectedProfile}
+              {`'`}s loadouts
+            </button>
+            <div className="grid gap-2">
+              {getProfileLoadouts.data?.map((loadout) => {
                 return (
                   <button
-                    className="w-full rounded-md bg-neutral-800 px-2 py-2 text-center duration-150 hover:bg-neutral-700"
-                    key={i}
+                    className="w-full rounded-md bg-purple-500 p-2 text-center font-bold text-white duration-150 hover:bg-purple-700"
+                    key={loadout.id}
                     onClick={() => {
-                      setSelectedProfile(profileName.username);
+                      setSelectedLoadout(loadout.id);
+                      setWeapon(loadout.weaponBody);
                     }}
                   >
-                    {profileName.username}
+                    {loadout.loadoutName}
                   </button>
                 );
               })}
             </div>
-            <div></div>
-          </div>
-          <button
-            className="w-fit rounded-md bg-red-500 p-2 font-bold text-white duration-150 hover:bg-red-700"
-            onClick={handleGetLoadouts}
-          >
-            Get {selectedProfile}
-            {`'`}s loadouts
-          </button>
-          <div className="grid gap-2">
-            {getProfileLoadouts.data?.map((loadout) => {
-              return (
-                <button
-                  className="w-full rounded-md bg-purple-500 p-2 text-center font-bold text-white duration-150 hover:bg-purple-700"
-                  key={loadout.id}
-                  onClick={() => {
-                    setSelectedLoadout(loadout.id);
-                    setWeapon(loadout.weaponBody);
-                  }}
-                >
-                  {loadout.loadoutName}
-                </button>
-              );
-            })}
-          </div>
 
-          <p className="text-green-500">{successAlert ? successAlert : ""}</p>
+            <p className="text-green-500">{successAlert ? successAlert : ""}</p>
 
-          <button
-            className="rounded-md  bg-blue-500 p-2 font-bold text-white duration-150 hover:bg-blue-700"
-            onClick={handleCreateLoadout}
-          >
-            Update Loadout
-          </button>
-          <div>
-            {weaponBuild != null &&
-            weaponBuild.attachments != undefined &&
-            weaponBuild.name ? (
-              <div className="flex flex-col rounded-md bg-neutral-800 p-2 text-center text-white">
-                <p>Build preview!</p>
-                <p>
-                  Body: <span className="font-bold">{weaponBuild?.name}</span>
-                </p>
-                <div className="flex flex-col gap-2">
-                  {weaponBuild?.attachments.map((attachment, i) => {
-                    return (
-                      <div
-                        className="flex flex-row gap-2 bg-neutral-700/30 px-4"
-                        key={i}
-                      >
-                        <p>id: {attachment?.id}</p>
-                        <p>hor: {attachment?.verticalTune}</p>
-                        <p>vert: {attachment?.horizontalTune}</p>
-                      </div>
-                    );
-                  })}
+            <button
+              className="rounded-md  bg-blue-500 p-2 font-bold text-white duration-150 hover:bg-blue-700"
+              onClick={handleCreateLoadout}
+            >
+              Update Loadout
+            </button>
+            <div>
+              {weaponBuild != null &&
+              weaponBuild.attachments != undefined &&
+              weaponBuild.name ? (
+                <div className="flex flex-col rounded-md bg-neutral-800 p-2 text-center text-white">
+                  <p>Build preview!</p>
+                  <p>
+                    Body: <span className="font-bold">{weaponBuild?.name}</span>
+                  </p>
+                  <div className="flex flex-col gap-2">
+                    {weaponBuild?.attachments.map((attachment, i) => {
+                      return (
+                        <div
+                          className="flex flex-row gap-2 bg-neutral-700/30 px-4"
+                          key={i}
+                        >
+                          <p>id: {attachment?.id}</p>
+                          <p>hor: {attachment?.verticalTune}</p>
+                          <p>vert: {attachment?.horizontalTune}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
+              ) : (
+                ""
+              )}
+            </div>
+            {getWeaponByName && weapon != "" ? (
+              <div className="flex flex-col items-center">
+                <p className="mb-4 text-2xl font-bold text-white">
+                  select your attatchments:
+                </p>
+                {attachmentSlotNames.map((attachmentName, i) => {
+                  return (
+                    <FilteredATtachment
+                      key={i}
+                      filterBy={attachmentName}
+                      getWeaponByName={getWeaponByName}
+                      setSelectedAttachment={setSelectedAttachment}
+                      setTuneModalVisibility={setTuneModalVisibility}
+                      weaponBuild={weaponBuild}
+                    />
+                  );
+                })}
               </div>
             ) : (
-              ""
+              <p className="mb-4 text-2xl font-bold text-red-500">
+                select a loadout to edit!
+              </p>
             )}
           </div>
-          {getWeaponByName && weapon != "" ? (
-            <div className="flex flex-col items-center">
-              <p className="mb-4 text-2xl font-bold text-white">
-                select your attatchments:
-              </p>
-              {attachmentSlotNames.map((attachmentName, i) => {
-                return (
-                  <FilteredATtachment
-                    key={i}
-                    filterBy={attachmentName}
-                    getWeaponByName={getWeaponByName}
-                    setSelectedAttachment={setSelectedAttachment}
-                    setTuneModalVisibility={setTuneModalVisibility}
-                    weaponBuild={weaponBuild}
-                  />
-                );
-              })}
-            </div>
-          ) : (
-            <p className="mb-4 text-2xl font-bold text-red-500">
-              select a loadout to edit!
-            </p>
-          )}
-        </div>
-        <Footer />
-      </main>
+          <Footer />
+        </main>
+      </>
     </>
   );
 };

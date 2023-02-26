@@ -57,7 +57,7 @@ const LoadoutThumbnailProfile = ({
               </div>
             </div>
             <Link href={`${loadoutLink}`}>
-              <Button intent={"outline"}>View build {">"}</Button>
+              <Button intent={"outline-disabled"}>View build {">"}</Button>
             </Link>
           </div>
         </div>

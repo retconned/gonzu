@@ -2,6 +2,7 @@ import { Button } from "@ui/Button";
 import Image from "next/image";
 import Link from "next/link";
 import type { profileShowcaseProps } from "../types/types";
+import { cn } from "../utils/cn";
 import InputType from "./InputType";
 import { Instagram, Tiktok, Twitch, Twitter, Youtube } from "./Socials";
 
@@ -19,7 +20,12 @@ const ProfileComponent = ({
 }: profileShowcaseProps) => {
   return (
     <>
-      <div className="flex w-56 max-w-sm flex-col items-center justify-between space-y-2 rounded-md border border-neutral-700 bg-neutral-800 px-4 py-4 duration-200 hover:border-lime-400">
+      <div
+        className={cn(
+          `flex w-56 max-w-sm flex-col items-center justify-between space-y-2 rounded-md border border-neutral-700 bg-neutral-800 px-4 py-4 duration-200 `,
+          username === "symfuhny" ? `hover:border-lime-400` : "",
+        )}
+      >
         <div className="flex flex-col items-center justify-center gap-4">
           <div className="outline-5 outline-offset-2 outline-red-600">
             {imageSrc != null ? (
@@ -55,11 +61,19 @@ const ProfileComponent = ({
           <Tiktok tiktok={tiktok} />
           <Instagram instagram={instagram} />
         </div>
-        <Link href={`${profileLink}`}>
-          <Button className="mt-2" intent={"fill"}>
-            View loadouts {">"}
-          </Button>
-        </Link>
+        <div>
+          {username === "symfuhny" ? (
+            <Link href={`${profileLink}`}>
+              <Button className="mt-2" intent={"fill"}>
+                View loadouts {">"}
+              </Button>
+            </Link>
+          ) : (
+            <Button className="mt-2" intent={"fill-disabled"}>
+              View loadouts {">"}
+            </Button>
+          )}
+        </div>
       </div>
     </>
   );

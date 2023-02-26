@@ -8,12 +8,8 @@ import Router from "next/router";
 import type { ProfileInputOnboarding } from "../../types/types";
 import { trpc } from "../../utils/trpc";
 
-// import { Router } from "next/router";
-
 const OnBoarding = () => {
   const { data: sessionData } = useSession();
-  // console.log(sessionData?.user?.name);
-  // console.log(sessionData);
   return (
     <div className="flex h-screen flex-col justify-between bg-neutral-900">
       <NavBar />
@@ -29,8 +25,6 @@ export default OnBoarding;
 
 const ProfileOnBoarder = ({ sessionData }: any) => {
   const { register, handleSubmit } = useForm<ProfileInputOnboarding>();
-
-  // console.log(sessionData?.user?.image);
 
   const onSubmit: SubmitHandler<ProfileInputOnboarding> = (data) => {
     profileCreate(data);

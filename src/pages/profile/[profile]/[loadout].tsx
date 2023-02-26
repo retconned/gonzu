@@ -39,10 +39,9 @@ const Loadout: NextPage = () => {
 
   const profileLoadoutsData = getProfileLoadouts.data;
 
-  // console.log(getLoadout.data?.attachments);
+  // console.log(getLoadout.data);
   (getLoadout.data?.attachments as Array<AttachmentBuild>)?.forEach(
     (loadedAttach: LoadedAttachmentType) => {
-      // console.log(loadedAttach);
       getLoadout.data?.Weapon.Attachments.forEach(
         (avalAttachment: { id: number; name: string | number }) => {
           if (avalAttachment.id === loadedAttach.id) {
@@ -50,10 +49,8 @@ const Loadout: NextPage = () => {
             loadedAttach["name"] =
               loadedAttach["type" as keyof LoadedAttachmentType];
             loadedAttach.name = avalAttachment.name;
-            console.log(loadedAttach);
             return loadedAttach;
           } else {
-            // console.log("xyz", avalAttachment.id);
           }
         },
       );
